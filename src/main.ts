@@ -3,10 +3,8 @@ import axios from 'axios';
 import format from 'date-fns/format';
 import { writeFileSync } from 'fs';
 
-interface User {
-  uid: number;
-  username: string;
-}
+import { toCSV } from './output';
+import { User } from './types';
 
 class Client {
   private readonly roomid: string;
@@ -48,14 +46,6 @@ class Client {
     }
     return ans.map((u) => ({ uid: u.uid, username: u.username }));
   }
-}
-
-function toCSV(list: User[]): string {
-  const text = ['uid,username'];
-  for (const user of list) {
-    text.push(`${user.uid},${user.username}`);
-  }
-  return text.join('\n');
 }
 
 function today(): string {

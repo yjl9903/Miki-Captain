@@ -46,6 +46,7 @@ const core = __importStar(__nccwpck_require__(5924));
 const axios_1 = __importDefault(__nccwpck_require__(2441));
 const format_1 = __importDefault(__nccwpck_require__(2258));
 const fs_1 = __nccwpck_require__(5747);
+const output_1 = __nccwpck_require__(4527);
 class Client {
     constructor(roomid, ruid) {
         this.roomid = roomid;
@@ -88,13 +89,6 @@ class Client {
         });
     }
 }
-function toCSV(list) {
-    const text = ['uid,username'];
-    for (const user of list) {
-        text.push(`${user.uid},${user.username}`);
-    }
-    return text.join('\n');
-}
 function today() {
     const date = new Date();
     return (0, format_1.default)(date, 'yyyy-MM-dd');
@@ -107,7 +101,7 @@ function run() {
         const list = yield client.get();
         {
             const csvname = `${today()}.csv`;
-            const content = toCSV(list);
+            const content = (0, output_1.toCSV)(list);
             (0, fs_1.writeFileSync)(csvname, content, 'utf-8');
         }
         {
@@ -119,6 +113,25 @@ function run() {
     });
 }
 run();
+
+
+/***/ }),
+
+/***/ 4527:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.toCSV = void 0;
+function toCSV(list) {
+    const text = ['uid,username'];
+    for (const user of list) {
+        text.push(`${user.uid},${user.username}`);
+    }
+    return text.join('\n');
+}
+exports.toCSV = toCSV;
 
 
 /***/ }),
