@@ -1,0 +1,27 @@
+name: Fetch
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 21 * * *'
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Timezone
+        run: sudo timedatectl set-timezone "Asia/Shanghai"
+      - uses: actions/checkout@v2
+      - uses: yjl9903/fetch-captain@latest
+        with:
+          roomid: '21672023'
+          ruid: '477317922'
+      - run: |
+          mv *.csv ./data/
+          git add *.csv
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git commit -m "Update"
+          git push
+
