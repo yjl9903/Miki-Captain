@@ -6,12 +6,11 @@
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
-    "format": "prettier --write '**/*.ts'",
-    "format-check": "prettier --check '**/*.ts'",
-    "lint": "eslint src/**/*.ts",
+    "format": "prettier --write ./src/*.ts",
+    "format-check": "prettier --check ./src/*.ts",
+    "lint": "eslint ./src/*.ts",
     "package": "ncc build --source-map --license licenses.txt",
-    "test": "jest",
-    "all": "npm run build && npm run format && npm run lint && npm run package && npm test"
+    "all": "npm run build && npm run format && npm run lint && npm run package"
   },
   "repository": {
     "type": "git",
@@ -25,7 +24,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.6.0"
+    "@actions/core": "^1.6.0",
+    "axios": "^0.26.0",
+    "date-fns": "^2.28.0"
   },
   "devDependencies": {
     "@types/node": "^16.10.5",
@@ -36,7 +37,7 @@
     "eslint-plugin-jest": "^25.3.2",
     "jest": "^27.2.5",
     "js-yaml": "^4.1.0",
-    "prettier": "2.5.1",
+    "prettier": "^2.5.1",
     "ts-jest": "^27.1.2",
     "typescript": "^4.4.4"
   }
