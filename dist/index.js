@@ -105,6 +105,11 @@ function run() {
             (0, fs_1.writeFileSync)(csvname, content, 'utf-8');
         }
         {
+            const mdname = `${today()}.md`;
+            const content = (0, output_1.toMarkdown)(list);
+            (0, fs_1.writeFileSync)(mdname, content, 'utf-8');
+        }
+        {
             let cnt = 1;
             for (const user of list) {
                 core.info(`${cnt++}. ${user.username} (uid: ${user.uid})`);
@@ -123,7 +128,7 @@ run();
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.toCSV = void 0;
+exports.toMarkdown = exports.toCSV = void 0;
 function toCSV(list) {
     const text = ['uid,username'];
     for (const user of list) {
@@ -132,6 +137,15 @@ function toCSV(list) {
     return text.join('\n');
 }
 exports.toCSV = toCSV;
+function toMarkdown(list) {
+    const text = ['|序号|uid|用户名|', '|:-:|:-:|:-:|'];
+    let cnt = 1;
+    for (const user of list) {
+        text.push(`|${cnt++}|${user.uid}|${user.username}|`);
+    }
+    return text.join('\n');
+}
+exports.toMarkdown = toMarkdown;
 
 
 /***/ }),

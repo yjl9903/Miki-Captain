@@ -3,7 +3,7 @@ import axios from 'axios';
 import format from 'date-fns/format';
 import { writeFileSync } from 'fs';
 
-import { toCSV } from './output';
+import { toCSV, toMarkdown } from './output';
 import { User } from './types';
 
 class Client {
@@ -64,6 +64,11 @@ async function run(): Promise<void> {
     const csvname = `${today()}.csv`;
     const content = toCSV(list);
     writeFileSync(csvname, content, 'utf-8');
+  }
+  {
+    const mdname = `${today()}.md`;
+    const content = toMarkdown(list);
+    writeFileSync(mdname, content, 'utf-8');
   }
 
   {
