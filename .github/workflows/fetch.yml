@@ -13,7 +13,7 @@ jobs:
       - name: Set Timezone
         run: sudo timedatectl set-timezone "Asia/Shanghai"
       - uses: actions/checkout@v2
-      - uses: yjl9903/fetch-captain@latest
+      - uses: yjl9903/fetch-captain@v0
         with:
           roomid: '21672023'
           ruid: '477317922'
