@@ -17,7 +17,8 @@ jobs:
         with:
           roomid: '21672023'
           ruid: '477317922'
-      - run: |
+      - name: Push
+        run: |
           mv *.csv ./data/
           git add *.csv
           git config user.name 'github-actions[bot]'
