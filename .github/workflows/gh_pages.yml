@@ -1,0 +1,29 @@
+name: Github Pages
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    needs: fetch
+    steps:
+      - name: Set Timezone
+        run: sudo timedatectl set-timezone "Asia/Shanghai"
+      - uses: actions/checkout@v2
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.1
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: pnpm
+      - name: Install
+        run: pnpm install
+      - name: Build
+        run: pnpm build
+      - name: Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
