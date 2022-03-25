@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div p="8">
+  <div px="8">
     <router-view></router-view>
   </div>
 </template>
