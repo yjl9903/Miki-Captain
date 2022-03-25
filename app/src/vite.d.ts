@@ -15,19 +15,5 @@ declare module '~icons/*' {
 }
 
 declare module '~captain' {
-  export interface CaptainRecord {
-    uid: number;
-
-    username: string;
-
-    type: string;
-  }
-
-  export interface Record {
-    date: Date;
-
-    captains: CaptainRecord[];
-  }
-
-  export const data: Record[];
+  export const data: any[];
 }
