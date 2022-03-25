@@ -4,6 +4,7 @@ specifiers:
   '@iconify/json': ^1.1.450
   '@types/node': ^17.0.22
   '@vitejs/plugin-vue': ^2.2.4
+  csv-parse: ^5.0.4
   date-fns: ^2.28.0
   pinia: ^2.0.11
   pnpm: ^6.32.3
@@ -17,6 +18,7 @@ specifiers:
   vue-router: '4'
 
 dependencies:
+  csv-parse: 5.0.4
   date-fns: 2.28.0
   vue: 3.2.31
   vue-router: 4.0.14_vue@3.2.31
@@ -434,6 +436,10 @@ packages:
 
   /csstype/2.6.20:
     resolution: {integrity: sha512-/WwNkdXfckNgw6S5R125rrW8ez139lBHWouiBvX8dfMFtcn6V81REDqnH7+CRpRipfYlyU1CmOnOxrmGcFOjeA==}
+    dev: false
+
+  /csv-parse/5.0.4:
+    resolution: {integrity: sha512-5AIdl8l6n3iYQYxan5djB5eKDa+vBnhfWZtRpJTcrETWfVLYN0WSj3L9RwvgYt+psoO77juUr8TG8qpfGZifVQ==}
     dev: false
 
   /date-fns/2.28.0:

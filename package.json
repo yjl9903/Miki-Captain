@@ -4,9 +4,11 @@
     "build": "vite build app",
     "dev": "vite app",
     "format": "prettier --write app/**/*.{ts,vue}",
-    "preview": "vite preview app"
+    "preview": "vite preview app",
+    "test": "vitest app"
   },
   "dependencies": {
+    "csv-parse": "^5.0.4",
     "date-fns": "^2.28.0",
     "vue": "^3.2.31",
     "vue-router": "4"

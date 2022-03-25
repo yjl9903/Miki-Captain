@@ -1,16 +1,18 @@
-import path from "path";
+import path from 'path';
 
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
 
-import Unocss from "unocss/vite";
+import Unocss from 'unocss/vite';
 import {
   presetUno,
   presetAttributify,
   transformerDirectives,
-  transformerVariantGroup,
-} from "unocss";
-import Icons from "unplugin-icons/vite";
+  transformerVariantGroup
+} from 'unocss';
+import Icons from 'unplugin-icons/vite';
+
+import fetchCaptain from './plugin';
 
 export default defineConfig({
   plugins: [
@@ -18,10 +20,11 @@ export default defineConfig({
     Icons(),
     Unocss({
       presets: [presetUno(), presetAttributify()],
-      transformers: [transformerDirectives(), transformerVariantGroup()],
+      transformers: [transformerDirectives(), transformerVariantGroup()]
     }),
+    fetchCaptain({ data: path.join(__dirname, '../data'), roomid: 21672023, ruid: 477317922 })
   ],
   build: {
-    outDir: path.join(__dirname, "../dist"),
-  },
+    outDir: path.join(__dirname, '../dist')
+  }
 });
