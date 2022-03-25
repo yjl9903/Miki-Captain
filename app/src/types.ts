@@ -31,11 +31,7 @@ export interface UpInfo {
   /**
    * 主页头图链接
    */
-  space: {
-    s_img: string;
-
-    l_img: string;
-  };
+  space: string;
 
   /**
    * 粉丝数

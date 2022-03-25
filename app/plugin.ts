@@ -63,6 +63,7 @@ export async function loadUp(uid: number) {
   } = await axios.get(`http://api.bilibili.com/x/web-interface/card?photo=true&mid=${uid}`);
   const card = data.card;
   delete data.card;
+  data.space = data.space.l_img.replace(/^http:\/\/i\d\./, 'https://i2.');
   return {
     ...card,
     ...data
