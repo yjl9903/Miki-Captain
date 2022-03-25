@@ -36,5 +36,10 @@ export interface UpInfo {
   /**
    * 粉丝数
    */
-  follower: number;
+  fans: number;
+
+  /**
+   *
+   */
+  like_num: number;
 }

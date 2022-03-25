@@ -64,6 +64,7 @@ export async function loadUp(uid: number) {
   const card = data.card;
   delete data.card;
   data.space = await transformBase64Image(data.space.l_img);
+  card.face = await transformBase64Image(card.face);
   return { ...card, ...data };
 }
 
@@ -71,5 +72,6 @@ async function transformBase64Image(url: string) {
   const response = await axios.get(url, {
     responseType: 'arraybuffer'
   });
-  return `data:image/png;base64,` + Buffer.from(response.data, 'binary').toString('base64');
+  const fmt = url.endsWith('.png') ? 'png' : 'jpeg';
+  return `data:image/${fmt};base64,` + Buffer.from(response.data, 'binary').toString('base64');
 }
