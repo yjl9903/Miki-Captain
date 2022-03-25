@@ -7,14 +7,15 @@ import format from 'date-fns/format';
   <!-- <h1 m="t-0">{{ up.name }} 的舰团</h1> -->
   <div
     h="24"
-    px="2"
+    mt="4"
+    px="4"
     py="4"
     flex
     items="center"
     justify="between"
-    border-0
-    border-b
-    border="gray-400"
+    rounded
+    border-1
+    border="light-800"
   >
     <div flex h="full">
       <div h="full">
