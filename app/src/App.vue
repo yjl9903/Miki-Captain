@@ -1,7 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { up } from './captain';
+</script>
 
 <template>
-  <div px="8">
-    <router-view></router-view>
-  </div>
+  <img :src="up.space" alt="space" class="w-full" />
+  <div px="8"><router-view></router-view></div>
 </template>
