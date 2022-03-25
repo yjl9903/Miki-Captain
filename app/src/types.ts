@@ -11,3 +11,34 @@ export interface Record {
 
   captains: CaptainRecord[];
 }
+
+export interface UpInfo {
+  /**
+   * 昵称
+   */
+  name: string;
+
+  /**
+   * 头像链接
+   */
+  face: string;
+
+  /**
+   * 签名
+   */
+  sign: string;
+
+  /**
+   * 主页头图链接
+   */
+  space: {
+    s_img: string;
+
+    l_img: string;
+  };
+
+  /**
+   * 粉丝数
+   */
+  follower: number;
+}

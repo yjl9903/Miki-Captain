@@ -2,6 +2,7 @@ import type { Plugin } from 'vite';
 
 import fs from 'fs';
 import path from 'path';
+import axios from 'axios';
 import { parse } from 'csv-parse/sync';
 
 import type { Record } from './src/types';
@@ -22,12 +23,14 @@ export default function fetchCaptain(option: Option): Plugin {
         return 'captain.js';
       }
     },
-    load(id) {
+    async load(id) {
       if (id === 'captain.js') {
         const records = loadCaptain(option.data);
+        const up = await loadUp(option.ruid);
         const data = [
           `export const data = ${JSON.stringify(records, null, 2)};`,
-          `for (const r of data) { r.date = new Date(r.date); }`
+          `for (const r of data) { r.date = new Date(r.date); }`,
+          `export const up = ${JSON.stringify(up, null, 2)};`
         ].join('\n');
         return data;
       }
@@ -52,4 +55,16 @@ export function loadCaptain(root: string): Record[] {
     }
   }
   return data;
+}
+
+export async function loadUp(uid: number) {
+  const {
+    data: { data }
+  } = await axios.get(`http://api.bilibili.com/x/web-interface/card?photo=true&mid=${uid}`);
+  const card = data.card;
+  delete data.card;
+  return {
+    ...card,
+    ...data
+  };
 }

@@ -16,4 +16,6 @@ declare module '~icons/*' {
 
 declare module '~captain' {
   export const data: any[];
+
+  export const up: any;
 }
