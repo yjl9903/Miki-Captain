@@ -1,10 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
+
+import Home from './pages/Home.vue';
 import Captain from './pages/Captain.vue';
 import CaptainList from './pages/CaptainList.vue';
 import CaptainSummary from './pages/CaptainSummary.vue';
-
-import Home from './pages/Home.vue';
-import Roll from './pages/Roll.vue';
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -31,7 +30,7 @@ export const router = createRouter({
         {
           path: '/roll',
           name: 'Roll',
-          component: Roll,
+          component: () => import('./pages/Roll.vue'),
           meta: {
             pos: '#roll'
           }
