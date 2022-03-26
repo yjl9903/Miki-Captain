@@ -1,14 +1,32 @@
 <script setup lang="ts">
 import format from 'date-fns/format';
+import { watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
-import type { Record } from '../types';
+import { useCurrent, findCurrent } from '../captain';
 
-defineProps<{ list: Record }>();
+const route = useRoute();
+const router = useRouter();
+const current = useCurrent();
+watch(
+  () => route.params,
+  (params) => {
+    if (params.year && params.month && params.day) {
+      const cur = findCurrent(+params.year, +params.month, +params.day);
+      if (cur) {
+        current.value = cur;
+      } else {
+        router.push({ name: 'Record' });
+      }
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
   <div class="list" w="full" overflow="auto">
-    <h2 mt="0">{{ format(list.date, 'yyyy 年 M 月 d 日') }} 舰长日报</h2>
+    <h2 mt="0">{{ format(current.date, 'yyyy 年 M 月 d 日') }} 舰长日报</h2>
     <table rounded border border-collapse w="full">
       <thead>
         <tr bg="light-300">
@@ -19,7 +37,7 @@ defineProps<{ list: Record }>();
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(cap, index) in list.captains" :key="cap.uid">
+        <tr v-for="(cap, index) in current.captains" :key="cap.uid">
           <td text="center">{{ index + 1 }}</td>
           <td>{{ cap.uid }}</td>
           <td>

@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import CaptainList from './pages/CaptainList.vue';
+import CaptainSummary from './pages/CaptainSummary.vue';
 
 import Home from './pages/Home.vue';
 
@@ -8,14 +10,32 @@ export const router = createRouter({
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
+      children: [
+        {
+          path: '',
+          alias: '/',
+          name: 'Record',
+          component: CaptainList
+        },
+        {
+          path: '/summary',
+          name: 'Summary',
+          component: CaptainSummary
+        },
+        {
+          path: '/:year/:month/:day',
+          name: 'RecordDay',
+          component: CaptainList
+        }
+      ]
     }
-  ],
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition;
-    } else {
-      return { top: 0 };
-    }
-  }
+  ]
+  // scrollBehavior(to, from, savedPosition) {
+  //   if (savedPosition) {
+  //     return savedPosition;
+  //   } else {
+  //     return { top: 0 };
+  //   }
+  // }
 });

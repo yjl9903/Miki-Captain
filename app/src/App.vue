@@ -47,9 +47,9 @@ provide(CURRENT, current);
       </div>
     </div>
   </div>
-  
+
   <div px="8"><router-view></router-view></div>
-  
+
   <footer>
     <div class="text-center text-gray-400 pt-4">
       <div mb="4">
