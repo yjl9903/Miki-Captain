@@ -73,7 +73,7 @@ const tenP = computed(() => {
 </script>
 
 <template>
-  <div class="role" w="full">
+  <div id="roll" w="full">
     <h2 mt="0" pb="4" border-b border-0 border-light-800>
       {{ format(current.date, 'yyyy 年 M 月 d 日') }} 舰长抽奖
     </h2>
@@ -149,13 +149,13 @@ const tenP = computed(() => {
 </template>
 
 <style>
-.role .button {
+#roll .button {
   position: relative;
   display: inline-block;
   margin: 20px;
 }
 
-.role .button a {
+#roll .button a {
   color: white;
   font-weight: bold;
   @apply text-2xl py-4 px-8;
@@ -178,7 +178,7 @@ const tenP = computed(() => {
   border-radius: 5px;
 }
 
-.role .button a:active {
+#roll .button a:active {
   top: 10px;
   background-color: #f78900;
 
@@ -187,7 +187,7 @@ const tenP = computed(() => {
   box-shadow: inset 0 1px 0 #ffe5c4, inset 0 -3px 0 #915100;
 }
 
-.role .button:after {
+#roll .button:after {
   content: '';
   height: 100%;
   width: 100%;

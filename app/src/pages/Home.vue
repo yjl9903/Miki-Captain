@@ -74,7 +74,7 @@ const handleExportExcel = (record: Record) => {
               end: data[0].date
             }"
             :attributes="[{ dates: current.date, highlight: true }]"
-            @click="mode = 'day', router.push({ name: 'Record' })"
+            @click="(mode = 'day'), router.push({ name: 'Record' })"
           />
         </div>
       </div>

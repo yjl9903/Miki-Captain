@@ -18,22 +18,34 @@ export const router = createRouter({
           path: '',
           alias: '/',
           name: 'Record',
-          component: CaptainList
+          component: CaptainList,
+          meta: {
+            pos: '#record'
+          }
         },
         {
           path: '/summary',
           name: 'Summary',
-          component: CaptainSummary
+          component: CaptainSummary,
+          meta: {
+            pos: '#summary'
+          }
         },
         {
           path: '/roll',
           name: 'Roll',
-          component: Roll
+          component: Roll,
+          meta: {
+            pos: '#roll'
+          }
         },
         {
           path: '/:year/:month/:day',
           name: 'RecordDay',
-          component: CaptainList
+          component: CaptainList,
+          meta: {
+            pos: '#record'
+          }
         }
       ]
     },
@@ -42,12 +54,18 @@ export const router = createRouter({
       name: 'Captain',
       component: Captain
     }
-  ]
-  // scrollBehavior(to, from, savedPosition) {
-  //   if (savedPosition) {
-  //     return savedPosition;
-  //   } else {
-  //     return { top: 0 };
-  //   }
-  // }
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (to.meta.pos) {
+      console.log(to.meta);
+
+      return {
+        el: to.meta.pos
+      };
+    } else if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { top: 0 };
+    }
+  }
 });

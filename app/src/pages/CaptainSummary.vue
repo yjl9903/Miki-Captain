@@ -3,7 +3,7 @@ import { captains } from '../captain';
 </script>
 
 <template>
-  <div class="list" w="full" overflow="auto">
+  <div id="summary" class="list" w="full" overflow="auto">
     <h2 mt="0">舰长总览</h2>
     <table rounded border border-collapse w="full">
       <thead>
