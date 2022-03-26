@@ -5,11 +5,8 @@ import format from 'date-fns/format';
 import { DatePicker } from 'v-calendar';
 import 'v-calendar/dist/style.css';
 
-import IconSearch from '~icons/ic/baseline-search';
-import IconClose from '~icons/mdi/close';
-
 import type { Record } from '../types';
-import { data, findCurrent, useCurrent } from '../captain';
+import { data, useCurrent } from '../captain';
 
 const router = useRouter();
 
@@ -55,72 +52,9 @@ const exportExcel = (record: Record) => {
   el.click();
   document.body.removeChild(el);
 };
-
-const searchInput = ref('');
-const search = (search: string) => {
-  {
-    const match = /(\d+)[-.年](\d+)[-.月](\d+)/.exec(search);
-    if (match) {
-      const cur = findCurrent(+match[1], +match[2], +match[3]);
-      if (cur) {
-        current.value = cur;
-        router.push({
-          name: 'RecordDay',
-          params: { year: match[1], month: match[2], day: match[3] }
-        });
-        searchInput.value = '';
-        return;
-      }
-    }
-  }
-  {
-    const match = /(\d+)[-.月](\d+)/.exec(search);
-    if (match) {
-      const cur = findCurrent(new Date().getFullYear(), +match[1], +match[2]);
-      if (cur) {
-        current.value = cur;
-        router.push({
-          name: 'RecordDay',
-          params: { year: '' + new Date().getFullYear(), month: match[1], day: match[2] }
-        });
-        searchInput.value = '';
-        return;
-      }
-    }
-  }
-  if (search === 'sum' || search === 'summary' || search.indexOf('总') !== -1) {
-    router.push({ name: 'Summary' });
-    searchInput.value = '';
-    return;
-  }
-};
 </script>
 
 <template>
-  <div w="full" my-8 flex justify="between">
-    <div class="relative" flex-grow>
-      <IconSearch class="absolute text-xl icon-search" />
-      <input
-        type="text"
-        name="contest_search"
-        id="contest_search"
-        class="input-search w-[calc(100%-4rem)] py-2 pr-6 rounded-md outline-none <md:shadow-box border border-light-900"
-        placeholder="UID 用户名 日期 (3.12)..."
-        v-model="searchInput"
-        @keypress.enter="search(searchInput)"
-      />
-      <IconClose
-        @click="searchInput = ''"
-        class="absolute text-xl icon-close text-gray-400 outline-transparent rounded-full focus:bg-light-400"
-      />
-    </div>
-    <div>
-      <c-button info @click="mode = mode === 'day' ? 'sum' : 'day'">{{
-        mode === 'day' ? '舰长总览' : '舰长日报'
-      }}</c-button>
-    </div>
-  </div>
-
   <div m="y-8" md="flex flex-row-reverse">
     <div lt-md="w-full mb-4" md="ml-8 flex-grow">
       <div p="4" rounded border-1 border="light-800">
