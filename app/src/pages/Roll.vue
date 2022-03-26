@@ -31,7 +31,7 @@ watch(username, (username) => {
 let timestamp: number;
 let fireworks: Fireworks | undefined = undefined;
 const roll = () => {
-  if (timestamp && new Date().getTime() - timestamp < 5000) {
+  if (timestamp && new Date().getTime() - timestamp < 3000) {
     return;
   }
   if (restUsers.value.length === 0) {
@@ -51,7 +51,7 @@ const roll = () => {
       }
       timestamp = new Date().getTime();
       fireworks.start();
-      setTimeout(() => fireworks?.stop(), 5000);
+      setTimeout(() => fireworks?.stop(), 3000);
       break;
     }
     restUsers.value.splice(id, 1);
