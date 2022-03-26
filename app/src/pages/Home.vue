@@ -9,15 +9,25 @@ import { data, up } from '../captain';
 import CaptainList from '../components/CaptainList.vue';
 
 const current = ref(data[0]);
+
+const marked = ref(data.map((r) => ({ dot: true, highlight: false, dates: r.date, raw: r })));
+const selectRef = ref(marked.value[0]);
+selectRef.value.dot = false;
+selectRef.value.highlight = true;
 const selectDate = computed({
   get() {
     return current.value.date;
   },
   set(d: Date) {
     const fmtDate = format(d, 'yyyy-MM-dd');
-    for (const r of data) {
-      if (format(r.date, 'yyyy-MM-dd') === fmtDate) {
-        current.value = r;
+    for (const r of marked.value) {
+      selectRef.value.dot = true;
+      selectRef.value.highlight = false;
+      if (format(r.dates, 'yyyy-MM-dd') === fmtDate) {
+        r.dot = false;
+        r.highlight = true;
+        current.value = r.raw;
+        selectRef.value = r;
         console.log(`[Captain] ${fmtDate}.csv`);
         return;
       }
@@ -88,7 +98,7 @@ const exportExcel = (record: Record) => {
           <c-button success @click="exportExcel(current)">导出 CSV</c-button>
         </div>
         <div mt="4">
-          <DatePicker v-model="selectDate" />
+          <DatePicker v-model="selectDate" :attributes="marked" />
         </div>
       </div>
     </div>
