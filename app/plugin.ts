@@ -1,4 +1,5 @@
 import type { Plugin } from 'vite';
+import { createHtmlPlugin } from 'vite-plugin-html';
 
 import fs from 'fs';
 import path from 'path';
@@ -15,22 +16,30 @@ interface Option {
   ruid: number;
 }
 
-export default function fetchCaptain(option: Option): Plugin {
-  return {
-    name: 'captain',
-    resolveId(id) {
-      if (id === '~captain') {
-        return 'captain.json';
-      }
-    },
-    async load(id) {
-      if (id === 'captain.json') {
-        const data = loadCaptain(option.data);
+export default function fetchCaptain(option: Option): Plugin[] {
+  return [
+    {
+      name: 'captain',
+      resolveId(id) {
+        if (id === '~captain') {
+          return 'captain.json';
+        }
+      },
+      async load(id) {
+        if (id === 'captain.json') {
+          const data = loadCaptain(option.data);
+          const up = await loadUp(option.ruid);
+          return JSON.stringify({ data, up }, null, 2);
+        }
+      },
+      async transformIndexHtml(html) {
         const up = await loadUp(option.ruid);
-        return JSON.stringify({ data, up }, null, 2);
+        return html
+          .replace('<%- favicon -%>', up.face)
+          .replace('<%- title -%>', `${up.name} 舰长日报`);
       }
     }
-  };
+  ];
 }
 
 export function loadCaptain(root: string): Record[] {
