@@ -57,7 +57,7 @@ const tenP = computed(() => {
 </script>
 
 <template>
-  <div class="list" w="full">
+  <div class="role" w="full">
     <h2 mt="0" pb="4" border-b border-0 border-light-800>
       {{ format(current.date, 'yyyy 年 M 月 d 日') }} 舰长抽奖
     </h2>
@@ -66,7 +66,9 @@ const tenP = computed(() => {
         <h3>奖品</h3>
         <h3>{{ gift.name }}</h3>
         <div mt="4">
-          <c-button success @click="roll">十连</c-button>
+          <div class="button !border-0" @click="roll">
+            <a>十连</a>
+          </div>
         </div>
       </div>
     </div>
@@ -104,3 +106,58 @@ const tenP = computed(() => {
     </div>
   </div>
 </template>
+
+<style>
+.role .button {
+  position: relative;
+  display: inline-block;
+  margin: 20px;
+}
+
+.role .button a {
+  color: white;
+  font-weight: bold;
+  @apply text-2xl py-4 px-8;
+  text-align: center;
+  text-decoration: none;
+  background-color: #ffa12b;
+  display: block;
+  position: relative;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  text-shadow: 0px 1px 0px #000;
+  filter: dropshadow(color=#000, offx=0px, offy=1px);
+
+  -webkit-box-shadow: inset 0 1px 0 #ffe5c4, 0 10px 0 #915100;
+  -moz-box-shadow: inset 0 1px 0 #ffe5c4, 0 10px 0 #915100;
+  box-shadow: inset 0 1px 0 #ffe5c4, 0 10px 0 #915100;
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.role .button a:active {
+  top: 10px;
+  background-color: #f78900;
+
+  -webkit-box-shadow: inset 0 1px 0 #ffe5c4, inset 0 -3px 0 #915100;
+  -moz-box-shadow: inset 0 1px 0 #ffe5c4, inset 0 -3pxpx 0 #915100;
+  box-shadow: inset 0 1px 0 #ffe5c4, inset 0 -3px 0 #915100;
+}
+
+.role .button:after {
+  content: '';
+  height: 100%;
+  width: 100%;
+  padding: 4px;
+  position: absolute;
+  bottom: -15px;
+  left: -4px;
+  z-index: -1;
+  background-color: #2b1800;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+</style>
