@@ -1,12 +1,29 @@
 <script setup lang="ts">
-import { ref, toRaw } from 'vue';
+import { computed, ref } from 'vue';
 import format from 'date-fns/format';
+import { DatePicker } from 'v-calendar';
+import 'v-calendar/dist/style.css';
 
 import type { Record } from '../types';
 import { data, up } from '../captain';
 import CaptainList from '../components/CaptainList.vue';
 
 const current = ref(data[0]);
+const selectDate = computed({
+  get() {
+    return current.value.date;
+  },
+  set(d: Date) {
+    const fmtDate = format(d, 'yyyy-MM-dd');
+    for (const r of data) {
+      if (format(r.date, 'yyyy-MM-dd') === fmtDate) {
+        current.value = r;
+        console.log(`[Captain] ${fmtDate}.csv`);
+        return;
+      }
+    }
+  }
+});
 
 const exportExcel = (record: Record) => {
   const fmtDate = format(record.date, 'yyyy年MM月dd日');
@@ -69,6 +86,9 @@ const exportExcel = (record: Record) => {
         </div>
         <div mt="4">
           <c-button success @click="exportExcel(current)">导出 CSV</c-button>
+        </div>
+        <div mt="4">
+          <DatePicker v-model="selectDate" />
         </div>
       </div>
     </div>
