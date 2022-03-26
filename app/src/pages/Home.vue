@@ -88,7 +88,7 @@ const exportExcel = (record: Record) => {
 
   <div m="y-8" flex>
     <captain-list w="3/5" :list="current"></captain-list>
-    <div ml="4" flex-grow>
+    <div ml="8" flex-grow>
       <div p="4" rounded border-1 border="light-800">
         <div>
           <span font="bold">日期 </span>
