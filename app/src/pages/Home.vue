@@ -7,7 +7,9 @@ import 'v-calendar/dist/style.css';
 import type { Record } from '../types';
 import { data, up } from '../captain';
 import CaptainList from '../components/CaptainList.vue';
+import CaptainSummary from '../components/CaptainSummary.vue';
 
+const mode = ref<'day' | 'sum'>('sum');
 const current = ref(data[0]);
 
 const marked = ref(data.map((r) => ({ dot: true, highlight: false, dates: r.date, raw: r })));
@@ -87,7 +89,13 @@ const exportExcel = (record: Record) => {
   </div>
 
   <div m="y-8" flex>
-    <captain-list w="3/5" :list="current"></captain-list>
+    <div w="3/5" v-if="mode === 'day'">
+      <captain-list :list="current"></captain-list>
+    </div>
+    <div v-else w="3/5">
+      <captain-summary></captain-summary>
+    </div>
+
     <div ml="8" flex-grow>
       <div p="4" rounded border-1 border="light-800">
         <div>
@@ -100,6 +108,11 @@ const exportExcel = (record: Record) => {
         </div>
         <div mt="4" pt="4" border border-0 border-t border-light-800>
           <DatePicker v-model="selectDate" :attributes="marked" />
+        </div>
+        <div mt="4">
+          <c-button @click="mode = (mode === 'day' ? 'sum' : 'day')">
+            {{ mode === 'day' ? '切换显示天数总览' : '切换显示舰长日报' }}
+          </c-button>
         </div>
       </div>
     </div>
