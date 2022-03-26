@@ -15,6 +15,9 @@ import Icons from 'unplugin-icons/vite';
 import fetchCaptain from './plugin';
 
 export default defineConfig({
+  define: {
+    __BUILD_TIME__: `"${new Date().toISOString()}"`
+  },
   plugins: [
     vue(),
     Icons(),

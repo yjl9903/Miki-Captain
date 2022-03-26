@@ -13,6 +13,8 @@ export interface Record {
 }
 
 export interface UpInfo {
+  mid: number;
+
   /**
    * 昵称
    */

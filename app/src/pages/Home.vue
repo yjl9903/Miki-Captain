@@ -20,9 +20,9 @@ const current = ref(data[0]);
     border="light-800"
   >
     <div flex class="md:h-full">
-      <div class="md:h-full">
+      <a :href="`https://space.bilibili.com/${up.mid}`" class="block md:h-full" target="_blank">
         <img class="lt-md:h-24 md:h-full" rounded="full" :src="up.face" alt="face" />
-      </div>
+      </a>
       <div h="full" ml="2">
         <div flex items="end" h="50%" text="2xl">{{ up.name }}</div>
         <div flex items="start" h="50%" mt="2" text="sm" font="light">{{ up.sign }}</div>
@@ -36,8 +36,8 @@ const current = ref(data[0]);
     </div>
   </div>
 
-  <div m="y-4">
-    <captain-list :list="current"></captain-list>
+  <div m="y-8">
+    <captain-list w="3/5" :list="current"></captain-list>
   </div>
 </template>
 
