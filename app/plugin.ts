@@ -20,19 +20,14 @@ export default function fetchCaptain(option: Option): Plugin {
     name: 'captain',
     resolveId(id) {
       if (id === '~captain') {
-        return 'captain.js';
+        return 'captain.json';
       }
     },
     async load(id) {
-      if (id === 'captain.js') {
-        const records = loadCaptain(option.data);
+      if (id === 'captain.json') {
+        const data = loadCaptain(option.data);
         const up = await loadUp(option.ruid);
-        const data = [
-          `export const data = ${JSON.stringify(records, null, 2)};`,
-          `for (const r of data) { r.date = new Date(r.date); }`,
-          `export const up = ${JSON.stringify(up, null, 2)};`
-        ].join('\n');
-        return data;
+        return JSON.stringify({ data, up }, null, 2);
       }
     }
   };
