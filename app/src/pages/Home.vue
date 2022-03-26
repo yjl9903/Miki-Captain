@@ -1,10 +1,29 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, toRaw } from 'vue';
+import format from 'date-fns/format';
 
+import type { Record } from '../types';
 import { data, up } from '../captain';
 import CaptainList from '../components/CaptainList.vue';
 
 const current = ref(data[0]);
+
+const exportExcel = (record: Record) => {
+  const fmtDate = format(record.date, 'yyyy年MM月dd日');
+  const data =
+    'data:text/plain;charset=utf-8,' +
+    encodeURIComponent(
+      'uid,username,type\n' +
+        record.captains.map((r) => `${r.uid},${r.username},${r.type}`).join('\n')
+    );
+  const el = document.createElement('a');
+  el.setAttribute('href', data);
+  el.setAttribute('download', `${fmtDate}舰长日报.csv`);
+  el.style.display = 'none';
+  document.body.appendChild(el);
+  el.click();
+  document.body.removeChild(el);
+};
 </script>
 
 <template>
@@ -28,16 +47,31 @@ const current = ref(data[0]);
         <div flex items="start" h="50%" mt="2" text="sm" font="light">{{ up.sign }}</div>
       </div>
     </div>
-    <div lt-md="mt-4">
+    <div lt-md="mt-4" flex>
       <div h="full" text="center">
         <div h="50%">粉丝数</div>
         <div h="50%" mt="2" font="light">{{ up.fans }}</div>
       </div>
+      <div h="full" text="center" ml="4">
+        <div h="50%">舰团</div>
+        <div h="50%" mt="2" font="light">{{ current.captains.length }}</div>
+      </div>
     </div>
   </div>
 
-  <div m="y-8">
+  <div m="y-8" flex>
     <captain-list w="3/5" :list="current"></captain-list>
+    <div ml="4" flex-grow>
+      <div p="4" rounded border-1 border="light-800">
+        <div>
+          <span font="bold">日期 </span>
+          <span>{{ format(current.date, 'yyyy 年 M 月 d 日') }}</span>
+        </div>
+        <div mt="4">
+          <c-button success @click="exportExcel(current)">导出 CSV</c-button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
