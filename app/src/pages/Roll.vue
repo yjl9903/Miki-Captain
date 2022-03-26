@@ -46,11 +46,11 @@ const roll = () => {
     const user = restUsers.value[id];
     logs.value.push(user);
     if (user.username === username.value) {
-      if (!fireworks) {
+      if (!fireworks && _fw.value) {
         fireworks = new Fireworks(_fw.value, { delay: { min: 5, max: 15 } });
       }
       timestamp = new Date().getTime();
-      fireworks.start();
+      fireworks?.start();
       setTimeout(() => fireworks?.stop(), 3000);
       break;
     }
@@ -99,7 +99,17 @@ const tenP = computed(() => {
       </div>
     </div>
     <div relative>
-      <div absolute top="-24" left="0" class="z-2" max-h="100" h="full" w="full" ref="_fw"></div>
+      <div
+        v-if="!!current.captains.find((c) => c.username === username)"
+        absolute
+        top="-24"
+        left="0"
+        class="z-2"
+        max-h="100"
+        h="full"
+        w="full"
+        ref="_fw"
+      ></div>
       <div mt="16">
         <span font="bold">你的用户名</span>
         <input
