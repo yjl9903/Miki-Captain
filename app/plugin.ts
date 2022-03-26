@@ -1,5 +1,4 @@
 import type { Plugin } from 'vite';
-import { createHtmlPlugin } from 'vite-plugin-html';
 
 import fs from 'fs';
 import path from 'path';
@@ -33,9 +32,10 @@ export default function fetchCaptain(option: Option): Plugin[] {
         }
       },
       async transformIndexHtml(html) {
-        const up = await loadUp(option.ruid);
+        const ctx = { face: '/face' };
+        const up = await loadUp(option.ruid, ctx);
         return html
-          .replace('<%- favicon -%>', up.face)
+          .replace('/favicon.ico', ctx.face)
           .replace('<%- title -%>', `${up.name} 舰长日报`);
       }
     }
@@ -62,21 +62,30 @@ export function loadCaptain(root: string): Record[] {
   return data.sort((lhs, rhs) => rhs.date.localeCompare(lhs.date));
 }
 
-export async function loadUp(uid: number) {
+export async function loadUp(uid: number, option = { face: '' }) {
   const {
     data: { data }
   } = await axios.get(`http://api.bilibili.com/x/web-interface/card?photo=true&mid=${uid}`);
   const card = data.card;
   delete data.card;
   data.space = await transformBase64Image(data.space.l_img);
-  card.face = await transformBase64Image(card.face);
+  if (option.face) {
+    option.face += '.' + (card.face.endsWith('.png') ? 'png' : 'jpeg');
+  }
+  card.face = await transformBase64Image(card.face, option.face);
   return { ...card, ...data };
 }
 
-async function transformBase64Image(url: string) {
+async function transformBase64Image(url: string, filename?: string) {
   const response = await axios.get(url, {
     responseType: 'arraybuffer'
   });
   const fmt = url.endsWith('.png') ? 'png' : 'jpeg';
+  if (filename) {
+    fs.writeFileSync(
+      path.join(__dirname, 'public', filename),
+      Buffer.from(response.data, 'binary')
+    );
+  }
   return `data:image/${fmt};base64,` + Buffer.from(response.data, 'binary').toString('base64');
 }
