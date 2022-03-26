@@ -96,8 +96,9 @@ const exportExcel = (record: Record) => {
         </div>
         <div mt="4">
           <c-button success @click="exportExcel(current)">导出 CSV</c-button>
+          <c-button success @click="exportExcel(current)" ml="4">导出 Excel</c-button>
         </div>
-        <div mt="4">
+        <div mt="4" pt="4" border border-0 border-t border-light-800>
           <DatePicker v-model="selectDate" :attributes="marked" />
         </div>
       </div>
