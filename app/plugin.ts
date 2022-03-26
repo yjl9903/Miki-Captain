@@ -13,6 +13,10 @@ interface Option {
   roomid: number;
 
   ruid: number;
+
+  gift?: {
+    name: string;
+  };
 }
 
 export default function fetchCaptain(option: Option): Plugin[] {
@@ -28,7 +32,7 @@ export default function fetchCaptain(option: Option): Plugin[] {
         if (id === 'captain.json') {
           const data = loadCaptain(option.data);
           const up = await loadUp(option.ruid);
-          return JSON.stringify({ data, up }, null, 2);
+          return JSON.stringify({ data, up, gift: option.gift }, null, 2);
         }
       },
       async transformIndexHtml(html) {

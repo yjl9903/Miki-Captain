@@ -30,7 +30,12 @@ export default defineConfig({
       presets: [presetUno(), presetAttributify()],
       transformers: [transformerDirectives(), transformerVariantGroup()]
     }),
-    fetchCaptain({ data: path.join(__dirname, '../data'), roomid, ruid })
+    fetchCaptain({
+      data: path.join(__dirname, '../data'),
+      roomid,
+      ruid,
+      gift: { name: '毛线毛裤' }
+    })
   ],
   build: {
     outDir: path.join(__dirname, '../dist')

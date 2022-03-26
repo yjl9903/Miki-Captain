@@ -4,6 +4,7 @@ import CaptainList from './pages/CaptainList.vue';
 import CaptainSummary from './pages/CaptainSummary.vue';
 
 import Home from './pages/Home.vue';
+import Roll from './pages/Roll.vue';
 
 export const router = createRouter({
   history: createWebHistory(),
@@ -23,6 +24,11 @@ export const router = createRouter({
           path: '/summary',
           name: 'Summary',
           component: CaptainSummary
+        },
+        {
+          path: '/roll',
+          name: 'Roll',
+          component: Roll
         },
         {
           path: '/:year/:month/:day',

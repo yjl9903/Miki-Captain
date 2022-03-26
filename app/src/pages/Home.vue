@@ -6,18 +6,20 @@ import { DatePicker } from 'v-calendar';
 import 'v-calendar/dist/style.css';
 
 import type { Record } from '../types';
-import { data, useCurrent } from '../captain';
+import { data, useCurrent, gift } from '../captain';
 import { exportCSV, exportExcel } from '../utils';
 
 const router = useRouter();
 
 const current = useCurrent();
-const mode = ref<'day' | 'sum'>('day');
+const mode = ref<'day' | 'sum' | 'roll'>('day');
 watch(mode, (mode) => {
   if (mode === 'day') {
     router.push({ name: 'Record' });
-  } else {
+  } else if (mode === 'sum') {
     router.push({ name: 'Summary' });
+  } else {
+    router.push({ name: 'Roll' });
   }
 });
 
@@ -60,8 +62,9 @@ const handleExportExcel = (record: Record) => {
           <span>{{ format(current.date, 'yyyy 年 M 月 d 日') }}</span>
         </div>
         <div mt="4">
-          <c-button success @click="handleExportCSV(current)">导出 CSV</c-button>
-          <c-button success @click="handleExportExcel(current)" ml="4">导出 Excel</c-button>
+          <c-button success @click="mode = 'roll'" v-if="!!gift" mr="2">抽奖</c-button>
+          <c-button success @click="handleExportCSV(current)" mr="2">导出 CSV</c-button>
+          <c-button success @click="handleExportExcel(current)">导出 Excel</c-button>
         </div>
         <div mt="4" pt="4" border border-0 border-t border-light-800>
           <DatePicker

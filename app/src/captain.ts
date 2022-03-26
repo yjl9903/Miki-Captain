@@ -12,6 +12,9 @@ for (const r of data) {
 
 export const up: UpInfo = captain.up;
 
+// @ts-ignore
+export const gift: { name: string } | undefined = captain.gift;
+
 export const CURRENT = Symbol('current');
 
 export function useCurrent(): Ref<Record> {
