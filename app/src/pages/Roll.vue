@@ -34,10 +34,13 @@ const roll = () => {
   if (timestamp && new Date().getTime() - timestamp < 5000) {
     return;
   }
+  if (restUsers.value.length === 0) {
+    reset();
+  }
   if (logs.value.length > 0 && logs.value[logs.value.length - 1].username === username.value) {
     reset();
   }
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 10 && restUsers.value.length > 0; i++) {
     const rd = random.uniformInt(0, restUsers.value.length - 1);
     const id = rd();
     const user = restUsers.value[id];
