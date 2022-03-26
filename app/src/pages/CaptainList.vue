@@ -16,7 +16,7 @@ watch(
       if (cur) {
         current.value = cur;
       } else {
-        router.push({ name: 'Record' });
+        router.replace({ name: 'Record' });
       }
     }
   },
@@ -41,9 +41,9 @@ watch(
           <td text="center">{{ index + 1 }}</td>
           <td>{{ cap.uid }}</td>
           <td>
-            <a :href="`https://space.bilibili.com/${cap.uid}`" target="_blank">{{
+            <router-link :to="{ name: 'Captain', params: { user: cap.uid } }">{{
               cap.username
-            }}</a>
+            }}</router-link>
           </td>
           <td text="center">{{ cap.type }}</td>
         </tr>

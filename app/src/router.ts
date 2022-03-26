@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import Captain from './pages/Captain.vue';
 import CaptainList from './pages/CaptainList.vue';
 import CaptainSummary from './pages/CaptainSummary.vue';
 
@@ -29,6 +30,11 @@ export const router = createRouter({
           component: CaptainList
         }
       ]
+    },
+    {
+      path: '/captain/:user',
+      name: 'Captain',
+      component: Captain
     }
   ]
   // scrollBehavior(to, from, savedPosition) {

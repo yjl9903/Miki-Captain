@@ -57,6 +57,15 @@ const search = (search: string) => {
     searchInput.value = '';
     return;
   }
+  if (/\d+/.test(search)) {
+    router.push({ name: 'Captain', params: { user: /\d+/.exec(search)![0] } });
+    searchInput.value = '';
+    return;
+  } else {
+    router.push({ name: 'Captain', params: { user: search.trim() } });
+    searchInput.value = '';
+    return;
+  }
 };
 </script>
 

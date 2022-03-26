@@ -27,21 +27,27 @@ export function findCurrent(year: number, month: number, day: number) {
   }
 }
 
-export const captainSet = new Map<number, { uid: number; username: string; length: number; months: Set<string> }>();
+export const captainSet = new Map<
+  number,
+  { uid: number; username: string; length: number; days: Set<string>; months: Set<string> }
+>();
 for (const record of data) {
   for (const user of record.captains) {
     const month = format(record.date, 'yyyy-MM');
+    const day = format(record.date, 'yyyy-M-d');
     if (captainSet.get(user.uid)) {
       captainSet.get(user.uid)!.length++;
+      captainSet.get(user.uid)!.days.add(day);
       captainSet.get(user.uid)!.months.add(month);
     } else {
       captainSet.set(user.uid, {
         uid: user.uid,
         username: user.username,
         length: 1,
+        days: new Set([day]),
         months: new Set([month])
       });
     }
   }
 }
-export const captains = [...captainSet.values()].sort((lhs, rhs) => rhs.length - lhs.length)
+export const captains = [...captainSet.values()].sort((lhs, rhs) => rhs.length - lhs.length);
