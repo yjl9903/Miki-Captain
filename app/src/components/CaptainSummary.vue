@@ -20,7 +20,7 @@ const captains = computed(() => {
 
 <template>
   <div class="list" w="full" overflow="auto">
-    <table rounded border border-collapse>
+    <table rounded border border-collapse w="full">
       <thead>
         <tr bg="light-300">
           <th text="center">#</th>
