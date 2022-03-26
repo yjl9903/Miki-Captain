@@ -36,7 +36,7 @@ export default function fetchCaptain(option: Option): Plugin[] {
         }
       },
       async transformIndexHtml(html) {
-        const ctx = { face: '/face' };
+        const ctx = { face: '/favicon' };
         const up = await loadUp(option.ruid, ctx);
         return html
           .replace('/favicon.ico', ctx.face)
