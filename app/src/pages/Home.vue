@@ -103,13 +103,13 @@ const exportExcel = (record: Record) => {
           <DatePicker v-model="selectDate" :attributes="marked" />
         </div>
         <div mt="4">
-          <c-button @click="mode = (mode === 'day' ? 'sum' : 'day')">
+          <c-button @click="mode = mode === 'day' ? 'sum' : 'day'">
             {{ mode === 'day' ? '切换显示天数总览' : '切换显示舰长日报' }}
           </c-button>
         </div>
       </div>
     </div>
-    
+
     <div md="w-3/5" lt-md="w-full" v-if="mode === 'day'">
       <captain-list :list="current"></captain-list>
     </div>
@@ -122,5 +122,10 @@ const exportExcel = (record: Record) => {
 <style>
 .face {
   border: 2px solid hsla(0, 0%, 100%, 0.4);
+}
+
+.list table th,
+.list table td {
+  @apply p-2 border border-light-800;
 }
 </style>

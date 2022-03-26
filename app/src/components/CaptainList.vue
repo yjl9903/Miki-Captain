@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-
 import type { Record } from '../types';
 
 defineProps<{ list: Record }>();
@@ -32,10 +30,3 @@ defineProps<{ list: Record }>();
     </table>
   </div>
 </template>
-
-<style>
-.list table th,
-.list table td {
-  @apply p-2 border border-light-800;
-}
-</style>

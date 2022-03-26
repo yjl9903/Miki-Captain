@@ -3,7 +3,7 @@ import { computed, ref } from 'vue';
 
 import { data } from '../captain';
 
-const captainSet = ref<Map<number, { uid: number , username: string; length: number }>>(new Map());
+const captainSet = ref<Map<number, { uid: number; username: string; length: number }>>(new Map());
 for (const record of data) {
   for (const user of record.captains) {
     if (captainSet.value.get(user.uid)) {
@@ -12,7 +12,7 @@ for (const record of data) {
       captainSet.value.set(user.uid, { uid: user.uid, username: user.username, length: 1 });
     }
   }
-};
+}
 const captains = computed(() => {
   return [...captainSet.value.values()].sort((lhs, rhs) => rhs.length - lhs.length);
 });
@@ -46,10 +46,3 @@ const captains = computed(() => {
     </table>
   </div>
 </template>
-
-<style>
-.list table th,
-.list table td {
-  @apply p-2 border border-light-800;
-}
-</style>
