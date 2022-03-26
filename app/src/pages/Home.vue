@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+
 import { data, up } from '../captain';
-import format from 'date-fns/format';
+import CaptainList from '../components/CaptainList.vue';
+
+const current = ref(data[0]);
 </script>
 
 <template>
-  <!-- <h1 m="t-0">{{ up.name }} 的舰团</h1> -->
   <div
     mt="4"
     px="4"
@@ -33,8 +36,8 @@ import format from 'date-fns/format';
     </div>
   </div>
 
-  <div m="t-4">
-    <div v-for="t in data">{{ format(t.date, 'yyyy-MM-dd') }}</div>
+  <div m="y-4">
+    <captain-list :list="current"></captain-list>
   </div>
 </template>
 

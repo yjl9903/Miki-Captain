@@ -54,7 +54,8 @@ export function loadCaptain(root: string): Record[] {
       data.push({ date, captains });
     }
   }
-  return data;
+  // @ts-ignore
+  return data.sort((lhs, rhs) => rhs.date.localeCompare(lhs.date));
 }
 
 export async function loadUp(uid: number) {
