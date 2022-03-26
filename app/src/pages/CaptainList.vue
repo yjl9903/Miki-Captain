@@ -26,7 +26,7 @@ watch(
 
 <template>
   <div id="record" class="list" w="full" overflow="auto">
-    <h2 mt="0">{{ format(current.date, 'yyyy 年 M 月 d 日') }} 舰长日报</h2>
+    <h2 mt="1">{{ format(current.date, 'yyyy 年 M 月 d 日') }} 舰长日报</h2>
     <table rounded border border-collapse w="full">
       <thead>
         <tr bg="light-300">

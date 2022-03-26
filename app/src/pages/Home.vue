@@ -33,6 +33,14 @@ const selectDate = computed({
       if (format(r.date, 'yyyy-MM-dd') === fmtDate) {
         current.value = r;
         console.log(`[Captain] ${fmtDate}.csv`);
+        router.push({
+          name: 'RecordDay',
+          params: {
+            year: format(r.date, 'yyyy'),
+            month: format(r.date, 'MM'),
+            day: format(r.date, 'dd')
+          }
+        });
         return;
       }
     }
@@ -74,7 +82,7 @@ const handleExportExcel = (record: Record) => {
               end: data[0].date
             }"
             :attributes="[{ dates: current.date, highlight: true }]"
-            @click="(mode = 'day'), router.push({ name: 'Record' })"
+            @click="mode = 'day'"
           />
         </div>
       </div>

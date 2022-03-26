@@ -4,7 +4,7 @@ import { captains } from '../captain';
 
 <template>
   <div id="summary" class="list" w="full" overflow="auto">
-    <h2 mt="0">舰长总览</h2>
+    <h2 mt="1">舰长总览</h2>
     <table rounded border border-collapse w="full">
       <thead>
         <tr bg="light-300">
