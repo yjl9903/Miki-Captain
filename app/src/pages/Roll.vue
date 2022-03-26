@@ -31,13 +31,10 @@ watch(username, (username) => {
 let timestamp: number;
 let fireworks: Fireworks | undefined = undefined;
 const roll = () => {
-  console.log(timestamp);
-
-  if (timestamp && new Date().getTime() - timestamp < 3000) {
+  if (timestamp && new Date().getTime() - timestamp < 5000) {
     return;
   }
   if (logs.value.length > 0 && logs.value[logs.value.length - 1].username === username.value) {
-    fireworks?.stop();
     reset();
   }
   for (let i = 0; i < 10; i++) {
