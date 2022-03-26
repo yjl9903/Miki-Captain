@@ -9,7 +9,7 @@ import { data, up } from '../captain';
 import CaptainList from '../components/CaptainList.vue';
 import CaptainSummary from '../components/CaptainSummary.vue';
 
-const mode = ref<'day' | 'sum'>('sum');
+const mode = ref<'day' | 'sum'>('day');
 const current = ref(data[0]);
 
 const marked = ref(data.map((r) => ({ dot: true, highlight: false, dates: r.date, raw: r })));
@@ -76,7 +76,7 @@ const exportExcel = (record: Record) => {
         <div flex items="start" h="50%" mt="2" text="sm" font="light">{{ up.sign }}</div>
       </div>
     </div>
-    <div lt-md="mt-4" flex>
+    <div lt-md="mt-4" flex justify="around">
       <div h="full" text="center">
         <div h="50%">粉丝数</div>
         <div h="50%" mt="2" font="light">{{ up.fans }}</div>
@@ -88,15 +88,8 @@ const exportExcel = (record: Record) => {
     </div>
   </div>
 
-  <div m="y-8" flex>
-    <div w="3/5" v-if="mode === 'day'">
-      <captain-list :list="current"></captain-list>
-    </div>
-    <div v-else w="3/5">
-      <captain-summary></captain-summary>
-    </div>
-
-    <div ml="8" flex-grow>
+  <div m="y-8" md="flex flex-row-reverse">
+    <div lt-md="w-full mb-4" md="ml-8 flex-grow">
       <div p="4" rounded border-1 border="light-800">
         <div>
           <span font="bold">日期 </span>
@@ -115,6 +108,13 @@ const exportExcel = (record: Record) => {
           </c-button>
         </div>
       </div>
+    </div>
+    
+    <div md="w-3/5" lt-md="w-full" v-if="mode === 'day'">
+      <captain-list :list="current"></captain-list>
+    </div>
+    <div v-else md="w-3/5" lt-md="w-full">
+      <captain-summary></captain-summary>
     </div>
   </div>
 </template>

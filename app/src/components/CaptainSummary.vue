@@ -19,8 +19,8 @@ const captains = computed(() => {
 </script>
 
 <template>
-  <div class="list">
-    <table rounded border border-collapse w="full">
+  <div class="list" w="full" overflow="auto">
+    <table rounded border border-collapse>
       <thead>
         <tr bg="light-300">
           <th text="center">#</th>
