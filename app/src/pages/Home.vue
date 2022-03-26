@@ -30,6 +30,7 @@ const selectDate = computed({
         r.highlight = true;
         current.value = r.raw;
         selectRef.value = r;
+        mode.value = 'day';
         console.log(`[Captain] ${fmtDate}.csv`);
         return;
       }
@@ -104,7 +105,7 @@ const exportExcel = (record: Record) => {
         </div>
         <div mt="4">
           <c-button @click="mode = mode === 'day' ? 'sum' : 'day'">
-            {{ mode === 'day' ? '切换显示天数总览' : '切换显示舰长日报' }}
+            {{ mode === 'day' ? '切换显示舰长总览' : '切换显示舰长日报' }}
           </c-button>
         </div>
       </div>

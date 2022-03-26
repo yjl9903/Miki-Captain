@@ -12,7 +12,7 @@ for (const record of data) {
     const month = format(record.date, 'yyyy-MM');
     if (captainSet.value.get(user.uid)) {
       captainSet.value.get(user.uid)!.length++;
-      captainSet.value.get(user.uid)!.months.add(month)
+      captainSet.value.get(user.uid)!.months.add(month);
     } else {
       captainSet.value.set(user.uid, {
         uid: user.uid,
@@ -30,6 +30,7 @@ const captains = computed(() => {
 
 <template>
   <div class="list" w="full" overflow="auto">
+    <h2 mt="0">舰长总览</h2>
     <table rounded border border-collapse w="full">
       <thead>
         <tr bg="light-300">
