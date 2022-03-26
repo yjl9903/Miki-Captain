@@ -16,6 +16,7 @@ import fetchCaptain from './plugin';
 
 export default defineConfig({
   define: {
+    __GITHUB_REPOSITORY__: JSON.stringify(process.env.GITHUB_REPOSITORY),
     __BUILD_TIME__: `"${new Date().toISOString()}"`
   },
   plugins: [

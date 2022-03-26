@@ -2,6 +2,8 @@
 
 declare const __BUILD_TIME__: string;
 
+declare const __GITHUB_REPOSITORY__: string;
+
 declare module '*.vue' {
   import type { DefineComponent } from 'vue';
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
