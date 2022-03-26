@@ -14,6 +14,10 @@ import Icons from 'unplugin-icons/vite';
 
 import fetchCaptain from './plugin';
 
+const ruid = 477317922;
+
+const roomid = 21672023;
+
 export default defineConfig({
   define: {
     __GITHUB_REPOSITORY__: JSON.stringify(process.env.GITHUB_REPOSITORY),
@@ -26,7 +30,7 @@ export default defineConfig({
       presets: [presetUno(), presetAttributify()],
       transformers: [transformerDirectives(), transformerVariantGroup()]
     }),
-    fetchCaptain({ data: path.join(__dirname, '../data'), roomid: 21672023, ruid: 477317922 })
+    fetchCaptain({ data: path.join(__dirname, '../data'), roomid, ruid })
   ],
   build: {
     outDir: path.join(__dirname, '../dist')
