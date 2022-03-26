@@ -5,28 +5,21 @@ import { DatePicker } from 'v-calendar';
 import 'v-calendar/dist/style.css';
 
 import type { Record } from '../types';
-import { data, up, useCurrent } from '../captain';
+import { data, useCurrent } from '../captain';
 import CaptainList from '../components/CaptainList.vue';
 import CaptainSummary from '../components/CaptainSummary.vue';
 
 const mode = ref<'day' | 'sum'>('day');
 const current = useCurrent();
 
-const marked = ref(data.map((r) => ({ highlight: false, dates: r.date, raw: r })));
-const selectRef = ref(marked.value[0]);
-selectRef.value.highlight = true;
 const selectDate = computed({
   get() {
     return current.value.date;
   },
   set(d: Date) {
     const fmtDate = format(d, 'yyyy-MM-dd');
-    selectRef.value.highlight = false;
-    for (const r of marked.value) {
-      if (format(r.dates, 'yyyy-MM-dd') === fmtDate) {
-        r.highlight = true;
-        current.value = r.raw;
-        selectRef.value = r;
+    for (const r of data) {
+      if (format(r.date, 'yyyy-MM-dd') === fmtDate) {
         console.log(`[Captain] ${fmtDate}.csv`);
         return;
       }
@@ -67,7 +60,6 @@ const exportExcel = (record: Record) => {
         <div mt="4" pt="4" border border-0 border-t border-light-800>
           <DatePicker
             v-model="selectDate"
-            :attributes="marked"
             :available-dates="{
               start: data[data.length - 1].date,
               end: data[0].date
