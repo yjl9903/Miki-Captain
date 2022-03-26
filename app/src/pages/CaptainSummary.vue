@@ -1,31 +1,5 @@
 <script setup lang="ts">
-import format from 'date-fns/format';
-import { computed, ref } from 'vue';
-
-import { data } from '../captain';
-
-const captainSet = ref<
-  Map<number, { uid: number; username: string; length: number; months: Set<string> }>
->(new Map());
-for (const record of data) {
-  for (const user of record.captains) {
-    const month = format(record.date, 'yyyy-MM');
-    if (captainSet.value.get(user.uid)) {
-      captainSet.value.get(user.uid)!.length++;
-      captainSet.value.get(user.uid)!.months.add(month);
-    } else {
-      captainSet.value.set(user.uid, {
-        uid: user.uid,
-        username: user.username,
-        length: 1,
-        months: new Set([month])
-      });
-    }
-  }
-}
-const captains = computed(() => {
-  return [...captainSet.value.values()].sort((lhs, rhs) => rhs.length - lhs.length);
-});
+import { captains } from '../captain';
 </script>
 
 <template>
