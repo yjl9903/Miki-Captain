@@ -20,6 +20,7 @@ const selectDate = computed({
     const fmtDate = format(d, 'yyyy-MM-dd');
     for (const r of data) {
       if (format(r.date, 'yyyy-MM-dd') === fmtDate) {
+        current.value = r;
         console.log(`[Captain] ${fmtDate}.csv`);
         return;
       }
