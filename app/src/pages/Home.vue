@@ -22,15 +22,14 @@ const selectDate = computed({
   },
   set(d: Date) {
     const fmtDate = format(d, 'yyyy-MM-dd');
+    selectRef.value.dot = true;
+    selectRef.value.highlight = false;
     for (const r of marked.value) {
-      selectRef.value.dot = true;
-      selectRef.value.highlight = false;
       if (format(r.dates, 'yyyy-MM-dd') === fmtDate) {
         r.dot = false;
         r.highlight = true;
         current.value = r.raw;
         selectRef.value = r;
-        mode.value = 'day';
         console.log(`[Captain] ${fmtDate}.csv`);
         return;
       }
