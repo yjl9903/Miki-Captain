@@ -96,8 +96,8 @@ const tenP = computed(() => {
       </div>
     </div>
     <div relative>
-      <div absolute top="-16" left="0" class="z-2" max-h="100" h="full" w="full" ref="_fw"></div>
-      <div mt="8">
+      <div absolute top="-24" left="0" class="z-2" max-h="100" h="full" w="full" ref="_fw"></div>
+      <div mt="16">
         <span font="bold">你的用户名</span>
         <input
           type="text"
