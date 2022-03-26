@@ -10,6 +10,7 @@
   "dependencies": {
     "csv-parse": "^5.0.4",
     "date-fns": "^2.28.0",
+    "random": "^3.0.6",
     "tippy.js": "^6.3.7",
     "v-calendar": "^3.0.0-alpha.8",
     "vue": "^3.2.31",
