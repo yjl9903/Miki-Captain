@@ -1,17 +1,55 @@
 <script setup lang="ts">
+import { provide, ref } from 'vue';
 import format from 'date-fns/format';
 import IconGithub from '~icons/mdi/github';
 
-import { up } from './captain';
+import { CURRENT, data, up } from './captain';
 
 const buildTime = format(new Date(__BUILD_TIME__), 'yyyy-MM-dd HH:mm');
 
 const githubRepo = __GITHUB_REPOSITORY__;
+
+const current = ref(data[0]);
+provide(CURRENT, current);
 </script>
 
 <template>
   <img :src="up.space" alt="space" class="w-full" />
+  <div
+    mt="4"
+    mx="8"
+    px="4"
+    py="4"
+    md="h-24 flex"
+    items="center"
+    justify="between"
+    rounded
+    border-1
+    border="light-800"
+  >
+    <div flex class="md:h-full">
+      <a :href="`https://space.bilibili.com/${up.mid}`" class="block md:h-full" target="_blank">
+        <img class="lt-md:h-24 md:h-full" rounded="full" :src="up.face" alt="face" />
+      </a>
+      <div h="full" ml="2">
+        <div flex items="end" h="50%" text="2xl">{{ up.name }}</div>
+        <div flex items="start" h="50%" mt="2" text="sm" font="light">{{ up.sign }}</div>
+      </div>
+    </div>
+    <div lt-md="mt-4" flex justify="around">
+      <div h="full" text="center">
+        <div h="50%">粉丝数</div>
+        <div h="50%" mt="2" font="light">{{ up.fans }}</div>
+      </div>
+      <div h="full" text="center" ml="4">
+        <div h="50%">舰团</div>
+        <div h="50%" mt="2" font="light">{{ current.captains.length }}</div>
+      </div>
+    </div>
+  </div>
+  
   <div px="8"><router-view></router-view></div>
+  
   <footer>
     <div class="text-center text-gray-400 pt-4">
       <div mb="4">

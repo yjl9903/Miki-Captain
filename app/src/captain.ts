@@ -1,3 +1,5 @@
+import { inject, Ref } from 'vue';
+
 import captain from '~captain';
 
 import type { Record, UpInfo } from './types';
@@ -8,3 +10,9 @@ for (const r of data) {
 }
 
 export const up: UpInfo = captain.up;
+
+export const CURRENT = Symbol('current');
+
+export function useCurrent(): Ref<Record> {
+  return inject<Ref<Record>>(CURRENT)!;
+}

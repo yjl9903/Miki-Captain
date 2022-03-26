@@ -5,12 +5,12 @@ import { DatePicker } from 'v-calendar';
 import 'v-calendar/dist/style.css';
 
 import type { Record } from '../types';
-import { data, up } from '../captain';
+import { data, up, useCurrent } from '../captain';
 import CaptainList from '../components/CaptainList.vue';
 import CaptainSummary from '../components/CaptainSummary.vue';
 
 const mode = ref<'day' | 'sum'>('day');
-const current = ref(data[0]);
+const current = useCurrent();
 
 const marked = ref(data.map((r) => ({ highlight: false, dates: r.date, raw: r })));
 const selectRef = ref(marked.value[0]);
@@ -53,38 +53,6 @@ const exportExcel = (record: Record) => {
 </script>
 
 <template>
-  <div
-    mt="4"
-    px="4"
-    py="4"
-    md="h-24 flex"
-    items="center"
-    justify="between"
-    rounded
-    border-1
-    border="light-800"
-  >
-    <div flex class="md:h-full">
-      <a :href="`https://space.bilibili.com/${up.mid}`" class="block md:h-full" target="_blank">
-        <img class="lt-md:h-24 md:h-full" rounded="full" :src="up.face" alt="face" />
-      </a>
-      <div h="full" ml="2">
-        <div flex items="end" h="50%" text="2xl">{{ up.name }}</div>
-        <div flex items="start" h="50%" mt="2" text="sm" font="light">{{ up.sign }}</div>
-      </div>
-    </div>
-    <div lt-md="mt-4" flex justify="around">
-      <div h="full" text="center">
-        <div h="50%">粉丝数</div>
-        <div h="50%" mt="2" font="light">{{ up.fans }}</div>
-      </div>
-      <div h="full" text="center" ml="4">
-        <div h="50%">舰团</div>
-        <div h="50%" mt="2" font="light">{{ current.captains.length }}</div>
-      </div>
-    </div>
-  </div>
-
   <div m="y-8" md="flex flex-row-reverse">
     <div lt-md="w-full mb-4" md="ml-8 flex-grow">
       <div p="4" rounded border-1 border="light-800">
