@@ -2,6 +2,7 @@
 import { computed, ref, watch } from 'vue';
 import format from 'date-fns/format';
 import random from 'random';
+import { Fireworks } from 'fireworks-js';
 
 import { useCurrent, gift } from '../captain';
 
@@ -10,6 +11,7 @@ const current = useCurrent();
 const username = ref('');
 const restUsers = ref([...current.value.captains]);
 const logs = ref<any[]>([]);
+const _fw = ref();
 
 if (window.localStorage.getItem('username')) {
   username.value = window.localStorage.getItem('username')!;
@@ -26,8 +28,16 @@ watch(username, (username) => {
   reset();
 });
 
+let timestamp: number;
+let fireworks: Fireworks | undefined = undefined;
 const roll = () => {
+  console.log(timestamp);
+
+  if (timestamp && new Date().getTime() - timestamp < 3000) {
+    return;
+  }
   if (logs.value.length > 0 && logs.value[logs.value.length - 1].username === username.value) {
+    fireworks?.stop();
     reset();
   }
   for (let i = 0; i < 10; i++) {
@@ -36,6 +46,12 @@ const roll = () => {
     const user = restUsers.value[id];
     logs.value.push(user);
     if (user.username === username.value) {
+      if (!fireworks) {
+        fireworks = new Fireworks(_fw.value, { delay: { min: 5, max: 15 } });
+      }
+      timestamp = new Date().getTime();
+      fireworks.start();
+      setTimeout(() => fireworks?.stop(), 5000);
       break;
     }
     restUsers.value.splice(id, 1);
@@ -61,8 +77,18 @@ const tenP = computed(() => {
     <h2 mt="0" pb="4" border-b border-0 border-light-800>
       {{ format(current.date, 'yyyy 年 M 月 d 日') }} 舰长抽奖
     </h2>
-    <div v-if="gift" text="center">
-      <div text="center" px="12" pb="4" inline-block border border-light-800 bg-light-100 rounded>
+    <div v-if="gift" relative text="center">
+      <div
+        class="-z-3"
+        text="center"
+        px="12"
+        pb="4"
+        inline-block
+        border
+        border-light-800
+        bg-light-100
+        rounded
+      >
         <h3>奖品</h3>
         <h3>{{ gift.name }}</h3>
         <div mt="4">
@@ -72,35 +98,40 @@ const tenP = computed(() => {
         </div>
       </div>
     </div>
-    <div mt="8">
-      <span font="bold">你的用户名</span>
-      <input
-        type="text"
-        name="contest_search"
-        id="contest_search"
-        class="p-2 ml-2 rounded-md outline-none <md:shadow-box border border-light-900"
-        v-model="username"
-      />
-    </div>
-    <div mt="4">
-      <span font="bold">单抽中奖率</span>
-      <span ml="2">{{ (100 / restUsers.length).toFixed(2) }} %</span>
-      <span> (剩余 {{ restUsers.length }} 位舰长)</span>
-    </div>
-    <div mt="4">
-      <span font="bold">十连中奖率</span>
-      <span ml="2">{{ tenP }} %</span>
-    </div>
-    <div mt="4">
-      <div v-if="logs.length" border border-light-800 rounded py-1>
-        <div
-          v-for="(log, idx) in logs.slice(0).reverse()"
-          :key="log.uid"
-          p-2
-          :class="['border-0', 'border-light-800', idx + 1 < logs.length && 'border-b']"
-        >
-          <span font="bold mono" inline-block text="center" w="8">{{ logs.length - idx }}</span>
-          <span ml="2">{{ log.username }}</span>
+    <div relative>
+      <div absolute top="-16" left="0" class="z-2" max-h="100" h="full" w="full" ref="_fw"></div>
+      <div mt="8">
+        <span font="bold">你的用户名</span>
+        <input
+          type="text"
+          name="contest_search"
+          id="contest_search"
+          class="p-2 ml-2 rounded-md outline-none <md:shadow-box border border-light-900"
+          v-model="username"
+        />
+      </div>
+      <div mt="4">
+        <span font="bold">单抽中奖率</span>
+        <span ml="2">{{ (100 / restUsers.length).toFixed(2) }} %</span>
+        <span> (剩余 {{ restUsers.length }} 位舰长)</span>
+      </div>
+      <div mt="4">
+        <span font="bold">十连中奖率</span>
+        <span ml="2">{{ tenP }} %</span>
+      </div>
+      <div mt="4">
+        <div v-if="logs.length" border border-light-800 rounded py-1>
+          <div
+            v-for="(log, idx) in logs.slice(0).reverse()"
+            :key="log.uid"
+            p-2
+            :class="['border-0', 'border-light-800', idx + 1 < logs.length && 'border-b']"
+          >
+            <span font="bold mono" inline-block text="center" w="8">{{ logs.length - idx }}</span>
+            <span ml="2" :class="[log.username === username && 'text-green-400 font-bold']">{{
+              log.username
+            }}</span>
+          </div>
         </div>
       </div>
     </div>
