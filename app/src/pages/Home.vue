@@ -7,6 +7,7 @@ import 'v-calendar/dist/style.css';
 
 import type { Record } from '../types';
 import { data, useCurrent } from '../captain';
+import { exportCSV, exportExcel } from '../utils';
 
 const router = useRouter();
 
@@ -36,21 +37,17 @@ const selectDate = computed({
   }
 });
 
-const exportExcel = (record: Record) => {
+const handleExportCSV = (record: Record) => {
   const fmtDate = format(record.date, 'yyyy年MM月dd日');
-  const data =
-    'data:text/plain;charset=utf-8,' +
-    encodeURIComponent(
-      'uid,username,type\n' +
-        record.captains.map((r) => `${r.uid},${r.username},${r.type}`).join('\n')
-    );
-  const el = document.createElement('a');
-  el.setAttribute('href', data);
-  el.setAttribute('download', `${fmtDate}舰长日报.csv`);
-  el.style.display = 'none';
-  document.body.appendChild(el);
-  el.click();
-  document.body.removeChild(el);
+  exportCSV(
+    `${fmtDate}舰长日报.csv`,
+    'uid,username,type\n' +
+      record.captains.map((r) => `${r.uid},${r.username},${r.type}`).join('\n')
+  );
+};
+const handleExportExcel = (record: Record) => {
+  const fmtDate = format(record.date, 'yyyy年MM月dd日');
+  exportExcel(`${fmtDate}舰长日报.xlsx`, fmtDate, record.captains);
 };
 </script>
 
@@ -63,8 +60,8 @@ const exportExcel = (record: Record) => {
           <span>{{ format(current.date, 'yyyy 年 M 月 d 日') }}</span>
         </div>
         <div mt="4">
-          <c-button success @click="exportExcel(current)">导出 CSV</c-button>
-          <c-button success @click="exportExcel(current)" ml="4">导出 Excel</c-button>
+          <c-button success @click="handleExportCSV(current)">导出 CSV</c-button>
+          <c-button success @click="handleExportExcel(current)" ml="4">导出 Excel</c-button>
         </div>
         <div mt="4" pt="4" border border-0 border-t border-light-800>
           <DatePicker
