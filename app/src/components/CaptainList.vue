@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import format from 'date-fns/format';
+
 import type { Record } from '../types';
 
 defineProps<{ list: Record }>();
@@ -6,6 +8,7 @@ defineProps<{ list: Record }>();
 
 <template>
   <div class="list" w="full" overflow="auto">
+    <h2 mt="0">{{ format(list.date, 'yyyy 年 M 月 d 日') }} 舰长日报</h2>
     <table rounded border border-collapse w="full">
       <thead>
         <tr bg="light-300">
