@@ -12,9 +12,8 @@ import CaptainSummary from '../components/CaptainSummary.vue';
 const mode = ref<'day' | 'sum'>('day');
 const current = ref(data[0]);
 
-const marked = ref(data.map((r) => ({ dot: true, highlight: false, dates: r.date, raw: r })));
+const marked = ref(data.map((r) => ({ highlight: false, dates: r.date, raw: r })));
 const selectRef = ref(marked.value[0]);
-selectRef.value.dot = false;
 selectRef.value.highlight = true;
 const selectDate = computed({
   get() {
@@ -22,11 +21,9 @@ const selectDate = computed({
   },
   set(d: Date) {
     const fmtDate = format(d, 'yyyy-MM-dd');
-    selectRef.value.dot = true;
     selectRef.value.highlight = false;
     for (const r of marked.value) {
       if (format(r.dates, 'yyyy-MM-dd') === fmtDate) {
-        r.dot = false;
         r.highlight = true;
         current.value = r.raw;
         selectRef.value = r;
