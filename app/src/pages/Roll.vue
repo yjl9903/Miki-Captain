@@ -104,7 +104,7 @@ const tenP = computed(() => {
         absolute
         top="-24"
         left="0"
-        class="z-2"
+        class="-z-1"
         max-h="100"
         h="full"
         w="full"
