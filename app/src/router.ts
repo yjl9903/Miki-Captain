@@ -18,10 +18,7 @@ export const router = createRouter({
           path: '',
           alias: '/',
           name: 'Record',
-          component: CaptainList,
-          meta: {
-            pos: '#record'
-          }
+          component: CaptainList
         },
         {
           path: '/summary',
@@ -57,8 +54,6 @@ export const router = createRouter({
   ],
   scrollBehavior(to, from, savedPosition) {
     if (to.meta.pos) {
-      console.log(to.meta);
-
       return {
         el: to.meta.pos
       };
