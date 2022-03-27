@@ -2,6 +2,10 @@ name: Github Pages
 
 on:
   push:
+  workflow_run:
+    workflows: ["Fetch"]
+    types:
+      - completed
 
 jobs:
   build:
