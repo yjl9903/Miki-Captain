@@ -64,7 +64,7 @@ const handleExportExcel = (record: Record) => {
 <template>
   <div m="y-8" md="flex flex-row-reverse">
     <div lt-md="w-full mb-4" md="ml-8 flex-grow">
-      <div p="4" rounded border-1 border="light-800">
+      <div p="4" rounded border-1 border="light-800" style="position: sticky; top: 1rem;">
         <div>
           <span font="bold">日期 </span>
           <span>{{ format(current.date, 'yyyy 年 M 月 d 日') }}</span>
