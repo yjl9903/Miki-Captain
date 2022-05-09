@@ -16,10 +16,10 @@ jobs:
         with:
           roomid: '21672023'
           ruid: '477317922'
-          sender: ${{ secrets.SENDER }}
-          sender_pass: ${{ secrets.SENDER_PASS }}
-          sender_host: ${{ secrets.SENDER_HOST }}
-          receiver: ${{ secrets.RECEIVER }}
+          # sender: ${{ secrets.SENDER }}
+          # sender_pass: ${{ secrets.SENDER_PASS }}
+          # sender_host: ${{ secrets.SENDER_HOST }}
+          # receiver: ${{ secrets.RECEIVER }}
       - name: Push
         run: |
           mv *.csv ./data/
