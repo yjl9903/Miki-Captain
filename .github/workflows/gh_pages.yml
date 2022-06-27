@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Set Timezone
         run: sudo timedatectl set-timezone "Asia/Shanghai"
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup pnpm
         uses: pnpm/action-setup@v2.2.1
       - name: Setup node
