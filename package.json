@@ -15,7 +15,7 @@
     "tippy.js": "^6.3.7",
     "v-calendar": "^3.0.0-alpha.8",
     "vue": "^3.2.37",
-    "vue-router": "^4.0.16",
+    "vue-router": "^4.1.1",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
