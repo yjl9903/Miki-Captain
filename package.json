@@ -21,7 +21,7 @@
   "devDependencies": {
     "@iconify/json": "^2.1.68",
     "@types/node": "^18.0.0",
-    "@unocss/reset": "^0.41.1",
+    "@unocss/reset": "^0.44.0",
     "@vitejs/plugin-vue": "^2.3.3",
     "axios": "^0.27.2",
     "pinia": "^2.0.14",
