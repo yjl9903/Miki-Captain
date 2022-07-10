@@ -31,7 +31,7 @@
     "unocss": "^0.41.1",
     "unplugin-icons": "^0.14.6",
     "vite": "^2.9.13",
-    "vitest": "^0.16.0"
+    "vitest": "^0.18.0"
   },
   "packageManager": "pnpm@7.3.0"
 }
