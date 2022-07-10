@@ -19,7 +19,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@iconify/json": "^2.1.68",
+    "@iconify/json": "^2.1.75",
     "@types/node": "^18.0.0",
     "@unocss/reset": "^0.41.1",
     "@vitejs/plugin-vue": "^2.3.3",
