@@ -136,7 +136,7 @@ const search = (search: string) => {
     </div>
   </div>
 
-  <div px="8"><router-view></router-view></div>
+  <div px-8><router-view></router-view></div>
 
   <footer>
     <div class="text-center text-gray-400 pt-4">

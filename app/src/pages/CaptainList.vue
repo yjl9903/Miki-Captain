@@ -22,10 +22,16 @@ watch(
   },
   { immediate: true }
 );
+
+const getGuardImg = (type: string) => {
+  if (type === '总督') return '/guard-1.png';
+  else if (type === '提督') return '/guard-2.png';
+  else return '/guard-3.png';
+};
 </script>
 
 <template>
-  <div id="record" class="list" w="full" overflow="auto">
+  <div id="record" class="list" w="full" overflow="auto" lt-md="text-xs">
     <h2 mt="1">{{ format(current.date, 'yyyy 年 M 月 d 日') }} 舰长日报</h2>
     <table rounded border border-collapse w="full">
       <thead>
@@ -38,14 +44,23 @@ watch(
       </thead>
       <tbody>
         <tr v-for="(cap, index) in current.captains" :key="cap.uid">
-          <td text="center">{{ index + 1 }}</td>
+          <td text="center" font-bold>{{ index + 1 }}</td>
           <td>{{ cap.uid }}</td>
           <td>
             <router-link :to="{ name: 'Captain', params: { user: cap.uid } }">{{
               cap.username
             }}</router-link>
           </td>
-          <td text="center">{{ cap.type }}</td>
+          <td text="center">
+            <div flex="~" items-center justify-center>
+              <img
+                :src="getGuardImg(cap.type)"
+                :alt="cap.type"
+                class="h-[2em] lt-md:h-[1.5em] select-none mr1"
+              />
+              <span font-light w-8>{{ cap.type }}</span>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
