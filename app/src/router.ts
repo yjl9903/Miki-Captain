@@ -40,7 +40,7 @@ export const router = createRouter({
           name: 'RecordDay',
           component: CaptainList,
           meta: {
-            pos: '#record'
+            pos: '#vup-info'
           }
         }
       ]

@@ -72,6 +72,7 @@ const search = (search: string) => {
 <template>
   <img :src="up.space" alt="space" class="w-full" />
   <div
+    id="vup-info"
     mt="4"
     mx="8"
     px="4"
