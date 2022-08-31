@@ -87,7 +87,7 @@ const search = (search: string) => {
       <a :href="`https://space.bilibili.com/${up.mid}`" class="block md:h-full" target="_blank">
         <img class="lt-md:h-24 md:h-full" rounded="full" :src="up.face" alt="face" />
       </a>
-      <div h="full" ml="2">
+      <div h="full" ml="4">
         <div flex items="end" h="50%" text="2xl">{{ up.name }}</div>
         <div flex items="start" h="50%" mt="2" text="sm" font="light">{{ up.sign }}</div>
       </div>
