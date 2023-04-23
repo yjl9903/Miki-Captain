@@ -11,20 +11,25 @@ jobs:
     steps:
       - name: Set Timezone
         run: sudo timedatectl set-timezone "Asia/Shanghai"
+
       - uses: actions/checkout@v3
-      - uses: yjl9903/fetch-captain@v0
+
+      - name: Fetch
+        id: fetch
+        uses: yjl9903/fetch-captain@v0
         with:
           roomid: '21672023'
           ruid: '477317922'
+          outDir: './data/'
           # sender: ${{ secrets.SENDER }}
           # sender_pass: ${{ secrets.SENDER_PASS }}
           # sender_host: ${{ secrets.SENDER_HOST }}
           # receiver: ${{ secrets.RECEIVER }}
+
       - name: Push
         run: |
-          mv *.csv ./data/
           git add *.csv
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          git commit -m "Update"
+          git commit -m "update: add ${{ steps.fetch.outputs.csv }}"
           git push
