@@ -1,3 +1,11 @@
+/*
+ * @Author: cube-yj
+ * @Date: 2023-06-14 22:40:30
+ * @LastEditTime: 2023-06-14 23:02:06
+ * @LastEditors: cube-yj
+ * @Description: 
+ * @FilePath: \Miki-Captain\app\vite.config.ts
+ */
 import * as path from 'node:path';
 
 import { defineConfig } from 'vite';
@@ -14,9 +22,9 @@ import Icons from 'unplugin-icons/vite';
 
 import fetchCaptain from './plugin';
 
-const ruid = 477317922;
+const ruid = 117906;
 
-const roomid = 21672023;
+const roomid = 11306;
 
 export default defineConfig({
   define: {
