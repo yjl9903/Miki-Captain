@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "vite build app",
+    "build": "vite build app --base /Miki-Captain/",
     "dev": "vite app",
     "format": "prettier --write app/**/*.{ts,vue}",
     "preview": "vite preview app",
