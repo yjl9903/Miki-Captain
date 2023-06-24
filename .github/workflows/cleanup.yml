@@ -12,7 +12,7 @@ jobs:
     
     runs-on: ubuntu-latest
     
-    if: github.repository != 'yjl9903/Miki-Captains'
+    if: github.repository != 'yjl9903/Miki-Captain'
     
     permissions:
       contents: write
