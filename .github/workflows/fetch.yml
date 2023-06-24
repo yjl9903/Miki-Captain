@@ -34,6 +34,7 @@ jobs:
           # receiver: ${{ secrets.RECEIVER }}
 
       - name: Push
+        continue-on-error: true
         run: |
           git add *.csv
           git config user.name 'github-actions[bot]'
