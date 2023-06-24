@@ -14,9 +14,9 @@ import Icons from 'unplugin-icons/vite';
 
 import fetchCaptain from './plugin';
 
-const ruid = 477317922;
+const ruid = +(process.env.RUID ?? 477317922);
 
-const roomid = 21672023;
+const roomid = +(process.env.ROOM_ID ?? 21672023);
 
 export default defineConfig({
   define: {
