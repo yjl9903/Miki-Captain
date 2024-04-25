@@ -23,20 +23,16 @@ jobs:
 
       - name: Fetch
         id: fetch
-        uses: yjl9903/fetch-captain@v0
+        uses: yjl9903/fetch-captain@v1
         with:
-          roomid: ${{ env.ROOM_ID }}
           ruid: ${{ env.RUID }}
-          outDir: './data/'
-          # sender: ${{ secrets.SENDER }}
-          # sender_pass: ${{ secrets.SENDER_PASS }}
-          # sender_host: ${{ secrets.SENDER_HOST }}
-          # receiver: ${{ secrets.RECEIVER }}
+          roomid: ${{ env.ROOM_ID }}
+          output: './data/YYYY/MM/DD.csv'
 
       - name: Push
         continue-on-error: true
         run: |
-          git add *.csv
+          git add **/*.csv
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git commit -m "update: add ${{ steps.fetch.outputs.csv }}"
