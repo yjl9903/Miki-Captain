@@ -14,7 +14,7 @@
     "fireworks-js": "^2.10.7",
     "random": "^4.1.0",
     "tippy.js": "^6.3.7",
-    "v-calendar": "^3.1.2",
+    "v-calendar": "3.0.0-alpha.8",
     "vue": "^3.4.25",
     "vue-router": "^4.3.2",
     "xlsx": "^0.18.5"
