@@ -74,7 +74,7 @@ const handleExportExcel = (record: Record) => {
           <c-button success @click="handleExportCSV(current)" mr="2">导出 CSV</c-button>
           <c-button success @click="handleExportExcel(current)">导出 Excel</c-button>
         </div>
-        <div mt="4" pt="4" border border-0 border-t border-light-800>
+        <div mt="4" pt="4" border border-solid border-0 border-t border-light-800>
           <DatePicker
             v-model="selectDate"
             :available-dates="{
