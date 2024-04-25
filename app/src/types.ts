@@ -1,9 +1,17 @@
 export interface CaptainRecord {
+  rank?: number;
+
   uid: number;
 
   username: string;
 
   type: string;
+
+  accompany?: number;
+
+  medal_name?: string;
+
+  medal_level?: number;
 }
 
 export interface Record {

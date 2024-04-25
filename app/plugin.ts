@@ -1,8 +1,10 @@
+import * as fs from 'fs';
+import * as path from 'path';
+
 import type { Plugin } from 'vite';
 
-import fs from 'fs';
-import path from 'path';
 import axios from 'axios';
+import { globby } from 'globby';
 import { parse } from 'csv-parse/sync';
 
 import type { Record } from './src/types';
@@ -30,7 +32,7 @@ export default function fetchCaptain(option: Option): Plugin[] {
       },
       async load(id) {
         if (id === 'captain.json') {
-          const data = loadCaptain(option.data);
+          const data = await loadCaptain(option.data);
           const up = await loadUp(option.ruid);
           return JSON.stringify({ data, up, gift: option.gift }, null, 2);
         }
@@ -46,10 +48,11 @@ export default function fetchCaptain(option: Option): Plugin[] {
   ];
 }
 
-export function loadCaptain(root: string): Record[] {
+export async function loadCaptain(root: string): Promise<Record[]> {
   const data: Record[] = [];
-  for (const filename of fs.readdirSync(root)) {
-    const match = /^(\d+)-(\d+)-(\d+)\.csv$/.exec(filename);
+  const files = await globby('**/*.csv', { cwd: root });
+  for (const filename of files) {
+    const match = /^(\d+)\/(\d+)\/(\d+)\.csv$/.exec(filename);
     if (match) {
       const captains = parse(fs.readFileSync(path.join(root, filename), 'utf-8'), {
         encoding: 'utf-8',
@@ -62,6 +65,7 @@ export function loadCaptain(root: string): Record[] {
       data.push({ date, captains });
     }
   }
+
   // @ts-ignore
   return data.sort((lhs, rhs) => rhs.date.localeCompare(lhs.date));
 }

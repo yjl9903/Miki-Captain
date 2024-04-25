@@ -1,5 +1,6 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "vite build app",
     "dev": "vite app",
@@ -8,30 +9,30 @@
     "test": "vitest app"
   },
   "dependencies": {
-    "csv-parse": "^5.3.0",
-    "date-fns": "^2.29.2",
-    "fireworks-js": "^1.4.1",
-    "random": "^3.0.6",
+    "csv-parse": "^5.5.5",
+    "date-fns": "^3.6.0",
+    "fireworks-js": "^2.10.7",
+    "random": "^4.1.0",
     "tippy.js": "^6.3.7",
-    "v-calendar": "^3.0.0-alpha.8",
-    "vue": "^3.2.38",
-    "vue-router": "^4.1.5",
+    "v-calendar": "^3.1.2",
+    "vue": "^3.4.25",
+    "vue-router": "^4.3.2",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@iconify/json": "^2.1.76",
-    "@types/node": "^18.7.14",
-    "@unocss/reset": "^0.45.13",
-    "@vitejs/plugin-vue": "^2.3.3",
-    "axios": "^0.27.2",
+    "@iconify/json": "^2.2.204",
+    "@types/node": "^20.12.7",
+    "@unocss/reset": "^0.59.4",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "axios": "^1.6.8",
     "globby": "^14.0.1",
-    "pinia": "^2.0.21",
+    "pinia": "^2.1.7",
     "prettier": "latest",
-    "typescript": "^4.8.2",
-    "unocss": "^0.45.13",
-    "unplugin-icons": "^0.14.8",
-    "vite": "^2.9.14",
-    "vitest": "^0.18.0"
+    "typescript": "^5.4.5",
+    "unocss": "^0.59.4",
+    "unplugin-icons": "^0.18.5",
+    "vite": "^5.2.10",
+    "vitest": "^1.5.2"
   },
   "packageManager": "pnpm@9.0.6"
 }
