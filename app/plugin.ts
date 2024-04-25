@@ -60,6 +60,20 @@ export async function loadCaptain(root: string): Promise<Record[]> {
         skip_empty_lines: true,
         trim: true
       });
+
+      // Fix data
+      for (const captain of captains) {
+        if (captain.rank) {
+          captain.rank = +captain.rank;
+        }
+        if (captain.accompany) {
+          captain.accompany = +captain.accompany;
+        }
+        if (captain.medal_level) {
+          captain.medal_level = +captain.medal_level;
+        }
+      }
+
       const date = new Date(+match[1], +match[2] - 1, +match[3], 2, 0, 0, 0).toISOString();
       // @ts-ignore
       data.push({ date, captains });

@@ -45,6 +45,7 @@ for (const record of data) {
   for (const user of record.captains) {
     const month = format(record.date, 'yyyy-MM');
     const day = format(record.date, 'yyyy-M-d');
+
     if (captainSet.get(user.uid)) {
       const captain = captainSet.get(user.uid)!;
 
@@ -65,7 +66,7 @@ for (const record of data) {
         uid: user.uid,
         username: user.username,
         length: 1,
-
+        accompany: user.accompany,
         days: new Set([day]),
         months: new Set([month])
       });
