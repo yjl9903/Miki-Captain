@@ -4,7 +4,7 @@ on:
   push:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Fetch"]
+    workflows: ['Fetch']
     types:
       - completed
 
@@ -19,13 +19,12 @@ jobs:
       - name: Set Timezone
         run: sudo timedatectl set-timezone "Asia/Shanghai"
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.4
+      - uses: pnpm/action-setup@v3
 
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20.x
           cache: pnpm

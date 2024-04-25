@@ -18,11 +18,11 @@ jobs:
       contents: write
       
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Clean data
         run: |
-          rm data/*.csv
+          rm -rf data/
           rm .github/workflows/cleanup.yml
       
       - name: Commit and push
