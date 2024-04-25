@@ -64,7 +64,7 @@ const handleExportExcel = (record: Record) => {
 <template>
   <div m="y-8" md="flex flex-row-reverse">
     <div lt-md="w-full mb-4" md="ml-8 flex-grow">
-      <div p="4" rounded border-1 border="light-800" style="position: sticky; top: 1rem">
+      <div p="4" rounded border="~ solid 1 light-800" style="position: sticky; top: 1rem">
         <div>
           <span font="bold">日期 </span>
           <span>{{ format(current.date, 'yyyy 年 M 月 d 日') }}</span>
@@ -116,9 +116,12 @@ const handleExportExcel = (record: Record) => {
 .input-search {
   padding-left: calc(1.25rem + 1em);
 }
+.input-search::placehodler {
+  --at-apply: align-baseline text-base;
+}
 @media (any-hover: hover) {
   .icon-close:hover {
-    @apply cursor-pointer bg-light-400;
+    --at-apply: cursor-pointer bg-light-400;
   }
 }
 </style>

@@ -81,8 +81,7 @@ const search = (search: string) => {
     items="center"
     justify="between"
     rounded
-    border-1
-    border="light-800"
+    border="~ solid 1 light-800"
   >
     <div flex class="md:h-full">
       <a :href="`https://space.bilibili.com/${up.mid}`" target="_blank" class="block md:h-full">
@@ -120,19 +119,21 @@ const search = (search: string) => {
           type="text"
           name="contest_search"
           id="contest_search"
-          class="input-search w-[calc(100%-4rem)] py-2 pr-6 rounded-md outline-none <md:shadow-box border border-light-900"
+          autocomplete="off"
+          class="input-search w-[calc(100%-4rem)] text-base align-baseline py-2 pr-6 rounded-md outline-none lt-md:shadow-box border border-solid border-light-900 focus:border-gray-500"
           placeholder="UID 用户名 日期 (3.12)..."
           v-model="searchInput"
           @keypress.enter="search(searchInput)"
         />
         <IconClose
           @click="searchInput = ''"
-          class="absolute text-xl icon-close text-gray-400 outline-transparent rounded-full focus:bg-light-400"
+          class="absolute text-xl p-1 icon-close text-gray-400 outline-transparent rounded-full focus:bg-light-400"
         />
       </div>
       <div class="ml-2">
         <c-button
           info
+          class="h-full"
           @click="
             route.name === 'Summary'
               ? router.push({ name: 'Record' })
