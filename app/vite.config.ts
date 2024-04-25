@@ -4,12 +4,6 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
 import Unocss from 'unocss/vite';
-import {
-  presetUno,
-  presetAttributify,
-  transformerDirectives,
-  transformerVariantGroup
-} from 'unocss';
 import Icons from 'unplugin-icons/vite';
 
 import fetchCaptain from './plugin';
@@ -26,10 +20,7 @@ export default defineConfig({
   plugins: [
     vue(),
     Icons(),
-    Unocss({
-      presets: [presetUno(), presetAttributify()],
-      transformers: [transformerDirectives(), transformerVariantGroup()]
-    }),
+    Unocss(),
     fetchCaptain({
       data: path.join(__dirname, '../data'),
       roomid,
@@ -38,6 +29,7 @@ export default defineConfig({
     })
   ],
   build: {
+    emptyOutDir: true,
     outDir: path.join(__dirname, '../dist')
   }
 });

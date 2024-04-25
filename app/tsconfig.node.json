@@ -9,6 +9,7 @@
   },
   "include": [
     "vite.config.ts",
+    "uno.config.ts",
     "plugin.ts",
     "src/**/*.ts",
     "src/**/*.d.ts",
