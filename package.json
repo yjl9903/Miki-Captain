@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "csv-parse": "^5.5.5",
-    "date-fns": "^3.6.0",
+    "date-fns": "^2.30.0",
     "fireworks-js": "^2.10.7",
     "random": "^4.1.0",
     "tippy.js": "^6.3.7",
