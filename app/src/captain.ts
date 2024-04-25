@@ -1,6 +1,7 @@
 import { inject, Ref } from 'vue';
 import format from 'date-fns/format';
 
+// @ts-ignore
 import captain from '~captain';
 
 import type { Record, UpInfo } from './types';
@@ -12,8 +13,7 @@ for (const r of data) {
 
 export const up: UpInfo = captain.up;
 
-// @ts-ignore
-export const gift: { name: string } | undefined = captain.gift;
+export const gift: { name: string } | undefined = (captain as any).gift;
 
 export const CURRENT = Symbol('current');
 
@@ -32,25 +32,45 @@ export function findCurrent(year: number, month: number, day: number) {
 
 export const captainSet = new Map<
   number,
-  { uid: number; username: string; length: number; days: Set<string>; months: Set<string> }
+  {
+    uid: number;
+    username: string;
+    length: number;
+    accompany?: number;
+    days: Set<string>;
+    months: Set<string>;
+  }
 >();
 for (const record of data) {
   for (const user of record.captains) {
     const month = format(record.date, 'yyyy-MM');
     const day = format(record.date, 'yyyy-M-d');
     if (captainSet.get(user.uid)) {
-      captainSet.get(user.uid)!.length++;
-      captainSet.get(user.uid)!.days.add(day);
-      captainSet.get(user.uid)!.months.add(month);
+      const captain = captainSet.get(user.uid)!;
+
+      // Merge accompany
+      if (user.accompany) {
+        if (captain.accompany) {
+          captain.accompany = Math.max(user.accompany, captain.accompany);
+        } else {
+          captain.accompany = user.accompany;
+        }
+      }
+
+      captain.length++;
+      captain.days.add(day);
+      captain.months.add(month);
     } else {
       captainSet.set(user.uid, {
         uid: user.uid,
         username: user.username,
         length: 1,
+
         days: new Set([day]),
         months: new Set([month])
       });
     }
   }
 }
+
 export const captains = [...captainSet.values()].sort((lhs, rhs) => rhs.length - lhs.length);

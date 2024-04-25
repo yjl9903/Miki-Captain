@@ -7,7 +7,7 @@ import { captains, captainSet, up } from '../captain';
 
 const route = useRoute();
 const router = useRouter();
-const captain = ref<typeof captains[0]>();
+const captain = ref<(typeof captains)[0]>();
 
 watch(
   () => route.params,
@@ -62,7 +62,7 @@ const handleClick = (date: Date) => {
     <h2>
       <a :href="`https://space.bilibili.com/${captain.uid}`">{{ captain.username }}</a>
     </h2>
-    <p>陪伴了 {{ up.name }} {{ captain.length }} 天。</p>
+    <p>陪伴了 {{ up.name }} {{ captain.accompany ?? captain.length }} 天。</p>
     <Heatmap
       @click="handleClick"
       :now="heatmapNow"

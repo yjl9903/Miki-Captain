@@ -4,31 +4,18 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "target": "ESNext",
+    "module": "ESNext",
     "lib": [
       "ESNext",
       "DOM"
     ],
-    "module": "ESNext",
     "moduleResolution": "Node",
-    "paths": {
-      "@animepaste/bangumi": [
-        "../bangumi/types.d.ts"
-      ],
-      "@animepaste/bangumi/*": [
-        "../bangumi/dist/*"
-      ],
-      "@animepaste/bangumi/client": [
-        "../bangumi/client.d.ts"
-      ],
-      "~/*": [
-        "./src/*"
-      ]
-    },
+    "paths": {},
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "ESNext",
     "types": [
       "vite/client"
     ],
