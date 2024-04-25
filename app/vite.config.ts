@@ -5,6 +5,8 @@ import vue from '@vitejs/plugin-vue';
 
 import Unocss from 'unocss/vite';
 import Icons from 'unplugin-icons/vite';
+import Info from 'unplugin-info/vite';
+import Analytics from 'unplugin-analytics/vite';
 
 import fetchCaptain from './plugin';
 
@@ -21,6 +23,15 @@ export default defineConfig({
     vue(),
     Icons(),
     Unocss(),
+    Info(),
+    Analytics({
+      analytics: {
+        umami: {
+          src: 'umami.onekuma.cn',
+          id: '4580e101-dfa9-45bf-a9d5-9d03fe4415d7'
+        }
+      }
+    }),
     fetchCaptain({
       data: path.join(__dirname, '../data'),
       roomid,
